@@ -739,6 +739,6 @@ BEGIN
 END
 
 /* f:\embarcadero\studio\15.0\lib\Win32\release\Controls.res */
-/* E:\UnivProject\NVMeTools\Forms\Forms.Main.dfm */
-/* E:\UnivProject\NVMeTools\NVMeTools.res */
-/* E:\UnivProject\NVMeTools\NVMeTools.drf */
+/* E:\UnivProject\NVMeTools\trunk\Forms\Forms.Main.dfm */
+/* E:\UnivProject\NVMeTools\trunk\NVMeTools.res */
+/* E:\UnivProject\NVMeTools\trunk\NVMeTools.drf */

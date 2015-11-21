@@ -30,7 +30,8 @@ uses
   OSFile.IoControl in 'WindowsFileAPI\OSFile.IoControl.pas',
   OSFile in 'WindowsFileAPI\OSFile.pas',
   MeasureUnit.DataSize in 'Modules\MeasureUnit.DataSize.pas',
-  Getter.DeviceDriver in 'Classes\Getter.DeviceDriver.pas';
+  Getter.DeviceDriver in 'Classes\Getter.DeviceDriver.pas',
+  LanguageStrings in 'Modules\LanguageStrings.pas';
 
 {$R *.res}
 

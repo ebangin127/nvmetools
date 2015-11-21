@@ -178,8 +178,10 @@ begin
 end;
 
 procedure TSamsungNVMeCommandSet.SetBufferForIdentifyDeviceCommand;
+const
+  IdentifyDevice = 1;
 begin
-  IOInnerBuffer.Buffer[0] := 1;
+  IOInnerBuffer.Buffer[0] := IdentifyDevice;
 end;
 
 procedure TSamsungNVMeCommandSet.SetBufferAndReceiveIdentifyDeviceCommand;
@@ -207,9 +209,12 @@ begin
 end;
 
 procedure TSamsungNVMeCommandSet.SetUnmapHeader;
+const
+  HeaderSize = 6;
+  ContentSize = 16;
 begin
-  IoInnerBuffer.Buffer[1] := 6 + 16;
-  IoInnerBuffer.Buffer[3] := 16;
+  IoInnerBuffer.Buffer[1] := HeaderSize + ContentSize;
+  IoInnerBuffer.Buffer[3] := ContentSize;
 end;
 
 function TSamsungNVMeCommandSet.InterpretIdentifyDeviceBuffer:
@@ -320,13 +325,15 @@ begin
 end;
 
 procedure TSamsungNVMeCommandSet.SetBufferForSMARTCommand;
+const
+  GetLogPage = 2;
+  GlobalLogPage = $FF;
 begin
-  IOInnerBuffer.Buffer[0] := 2;
-  IOInnerBuffer.Buffer[2] := $7F;
-  IOInnerBuffer.Buffer[4] := $FF;
-  IOInnerBuffer.Buffer[5] := $FF;
-  IOInnerBuffer.Buffer[6] := $FF;
-  IOInnerBuffer.Buffer[7] := $FF;
+  IOInnerBuffer.Buffer[0] := GetLogPage;
+  IOInnerBuffer.Buffer[4] := GlobalLogPage;
+  IOInnerBuffer.Buffer[5] := GlobalLogPage;
+  IOInnerBuffer.Buffer[6] := GlobalLogPage;
+  IOInnerBuffer.Buffer[7] := GlobalLogPage;
 end;
 
 procedure TSamsungNVMeCommandSet.SetBufferAndReceiveSMARTCommand;

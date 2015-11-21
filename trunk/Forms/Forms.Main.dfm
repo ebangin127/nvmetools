@@ -1,7 +1,6 @@
 object fMain: TfMain
   Left = 0
   Top = 0
-  Caption = 'Naraeon NVMe Tools (Refresh - F5)'
   ClientHeight = 400
   ClientWidth = 750
   Color = clBtnFace

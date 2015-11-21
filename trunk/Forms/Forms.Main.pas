@@ -8,7 +8,7 @@ uses
   Vcl.StdCtrls,
   Getter.PhysicalDriveList.Auto, Device.PhysicalDrive.List,
   Device.PhysicalDrive, Device.SMART.List, MeasureUnit.DataSize,
-  Getter.DeviceDriver;
+  Getter.DeviceDriver, LanguageStrings;
 
 type
   TfMain = class(TForm)
@@ -33,6 +33,9 @@ type
     procedure FillGridRAWValue;
     procedure FillGridReadableValue;
     procedure RefreshGridDriver;
+    procedure SetRowName;
+    procedure SetColumnName;
+    procedure SetCaption;
   end;
 
 var
@@ -70,6 +73,38 @@ begin
   gValues.Cells[1, 3] := DeviceDriverInformation.Date;
   gValues.Cells[1, 4] := DeviceDriverInformation.InfName;
   gValues.Cells[1, 5] := DeviceDriverInformation.Version;
+end;
+
+procedure TfMain.SetRowName;
+begin
+  AddRow(DriverName[CurrLang]);
+  AddRow(DriverVendor[CurrLang]);
+  AddRow(DriverDate[CurrLang]);
+  AddRow(DriverFileName[CurrLang]);
+  AddRow(DriverVersion[CurrLang]);
+  AddRow(FirmwareRevision[CurrLang]);
+  AddRow(SerialNumber[CurrLang]);
+  AddRow(CriticalWarning[CurrLang]);
+  AddRow(CompositeTemperature[CurrLang]);
+  AddRow(AvailableSpare[CurrLang]);
+  AddRow(AvailableSpareThreshold[CurrLang]);
+  AddRow(PercentageUsed[CurrLang]);
+  AddRow(DataUnitsRead[CurrLang]);
+  AddRow(DataUnitsWritten[CurrLang]);
+  AddRow(HostReadCommands[CurrLang]);
+  AddRow(HostWriteCommands[CurrLang]);
+  AddRow(ControllerBusyTime[CurrLang]);
+  AddRow(PowerCycles[CurrLang]);
+  AddRow(PowerOnHours[CurrLang]);
+  AddRow(UnsafeShutdowns[CurrLang]);
+  AddRow(IntegrityErrors[CurrLang]);
+  AddRow(NumberOfErrorLogs[CurrLang]);
+end;
+
+procedure TfMain.SetColumnName;
+begin
+  AddColumn(RAWValue[CurrLang]);
+  AddColumn(HumanReadableValue[CurrLang]);
 end;
 
 procedure TfMain.RefreshGridBasic;
@@ -135,8 +170,15 @@ begin
   FreeAndNil(DriveList);
 end;
 
+procedure TfMain.SetCaption;
+begin
+  Caption := 'Naraeon NVMe Tools Alpha 1 (' +
+    ToRefreshPress[CurrLang] + ' - F5)';
+end;
+
 procedure TfMain.FormCreate(Sender: TObject);
 begin
+  SetCaption;
   RefreshDrives;
   InitializeGrid;
 end;
@@ -169,33 +211,8 @@ end;
 
 procedure TfMain.InitializeGrid;
 begin
-  AddRow('Driver Name');
-  AddRow('Driver Vendor');
-  AddRow('Driver Date');
-  AddRow('Driver File Name');
-  AddRow('Driver Version');
-
-  AddRow('Firmware');
-  AddRow('Serial');
-
-  AddRow('Critical Warning');
-  AddRow('Composite Temperature(In Kelvin)');
-  AddRow('Available Spare(%)');
-  AddRow('Available Spare Threshold(%)');
-  AddRow('Percentage Used(%)');
-  AddRow('Data Units Read(0.5KB)');
-  AddRow('Data Units Written(0.5KB)');
-  AddRow('Host Read Commands');
-  AddRow('Host Write Commands');
-  AddRow('Controller Busy Time(In Minutes)');
-  AddRow('Power Cycles');
-  AddRow('Power On Hours');
-  AddRow('Unsafe Shutdowns');
-  AddRow('Media and Data Integrity Errors');
-  AddRow('Number of Error Information Log Entries');
-
-  AddColumn('RAW');
-  AddColumn('Human Readable');
+  SetRowName;
+  SetColumnName;
 end;
 
 procedure TfMain.AddColumn(const ColumnName: String);
