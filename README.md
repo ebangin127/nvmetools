@@ -1,5 +1,4 @@
-# nvmetools
-Naraeon NVMe Tools
+# Naraeon NVMe Tools
 ========
 Naraeon SSD Lifelogger(a.k.a NSLogger) is an open source NVMe SMART / Health Information Log Viewer.
 
