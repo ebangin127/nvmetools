@@ -104,8 +104,8 @@ begin
     (UnitSizeInMB * Threshold) then
   begin
     result :=
-      Format('%.' + IntToStr(Setting.FPrecision) + 'f' + UnitToTest.FUnitName,
-        [SizeInMB / UnitSizeInMB]);
+      Format('%.' + IntToStr(Setting.FPrecision) + 'f' + ' ' +
+        UnitToTest.FUnitName, [SizeInMB / UnitSizeInMB]);
   end;
 end;
 

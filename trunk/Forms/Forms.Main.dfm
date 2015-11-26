@@ -1,8 +1,8 @@
 object fMain: TfMain
   Left = 0
   Top = 0
-  ClientHeight = 400
-  ClientWidth = 750
+  ClientHeight = 500
+  ClientWidth = 700
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -26,14 +26,31 @@ object fMain: TfMain
     TabOrder = 0
     OnChange = cSelectDriveChange
   end
-  object gValues: TStringGrid
-    Left = 184
-    Top = 120
-    Width = 320
-    Height = 120
-    ColCount = 3
-    DefaultColWidth = 300
-    RowCount = 2
+  object tValues: TTabControl
+    Left = 39
+    Top = 48
+    Width = 289
+    Height = 193
     TabOrder = 1
+    Tabs.Strings = (
+      'Basic'
+      'Driver'
+      'Critical'
+      'SMART')
+    TabIndex = 0
+    OnChange = tValuesChange
+    object gValues: TStringGrid
+      Left = 17
+      Top = 33
+      Width = 320
+      Height = 120
+      ColCount = 3
+      DefaultColWidth = 400
+      RowCount = 2
+      TabOrder = 0
+      RowHeights = (
+        24
+        24)
+    end
   end
 end

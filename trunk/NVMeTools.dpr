@@ -31,7 +31,8 @@ uses
   OSFile in 'WindowsFileAPI\OSFile.pas',
   MeasureUnit.DataSize in 'Modules\MeasureUnit.DataSize.pas',
   Getter.DeviceDriver in 'Classes\Getter.DeviceDriver.pas',
-  LanguageStrings in 'Modules\LanguageStrings.pas';
+  LanguageStrings in 'Modules\LanguageStrings.pas',
+  Getter.SlotDataWidth in 'Classes\Getter.SlotDataWidth.pas';
 
 {$R *.res}
 
