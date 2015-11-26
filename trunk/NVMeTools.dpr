@@ -32,7 +32,9 @@ uses
   MeasureUnit.DataSize in 'Modules\MeasureUnit.DataSize.pas',
   Getter.DeviceDriver in 'Classes\Getter.DeviceDriver.pas',
   LanguageStrings in 'Modules\LanguageStrings.pas',
-  Getter.SlotDataWidth in 'Classes\Getter.SlotDataWidth.pas';
+  Getter.SlotSpeed in 'Classes\Getter.SlotSpeed.pas',
+  OS.SetupAPI in 'Modules\OS.SetupAPI.pas',
+  Getter.SlotSpeedByDeviceID in 'Classes\Getter.SlotSpeedByDeviceID.pas';
 
 {$R *.res}
 

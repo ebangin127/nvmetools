@@ -134,7 +134,9 @@
         <DCCReference Include="Modules\MeasureUnit.DataSize.pas"/>
         <DCCReference Include="Classes\Getter.DeviceDriver.pas"/>
         <DCCReference Include="Modules\LanguageStrings.pas"/>
-        <DCCReference Include="Classes\Getter.SlotDataWidth.pas"/>
+        <DCCReference Include="Classes\Getter.SlotSpeed.pas"/>
+        <DCCReference Include="Modules\OS.SetupAPI.pas"/>
+        <DCCReference Include="Classes\Getter.SlotSpeedByDeviceID.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -161,7 +163,13 @@
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment>
-                <DeployFile LocalName="Win32\Release\NVMeTools.exe" Configuration="Release" Class="ProjectOutput">
+                <DeployFile LocalName="..\bin\NVMeTools.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>NVMeTools.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\bin\NVMeTools.exe" Configuration="Release" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>NVMeTools.exe</RemoteName>
                         <Overwrite>true</Overwrite>
@@ -173,7 +181,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\bin\NVMeTools.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="Win32\Release\NVMeTools.exe" Configuration="Release" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>NVMeTools.exe</RemoteName>
                         <Overwrite>true</Overwrite>

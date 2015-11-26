@@ -33,8 +33,10 @@ const
   DriverVersion: TLanguageString =
     ('드라이버 버전', 'Driver Version');
 
-  PCIDataWidth: TLanguageString =
-    ('PCI 링크 너비', 'PCI Link width');
+  PCIMaxSpeed: TLanguageString =
+    ('최대 속도', 'Maximum Speed');
+  PCICurrentSpeed: TLanguageString =
+    ('현재 속도', 'Negotiated Speed');
 
   Model: TLanguageString =
     ('모델', 'Model');

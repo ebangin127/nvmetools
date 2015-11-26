@@ -8,7 +8,7 @@ uses
   Vcl.StdCtrls,
   Getter.PhysicalDriveList.Auto, Device.PhysicalDrive.List,
   Device.PhysicalDrive, Device.SMART.List, MeasureUnit.DataSize,
-  Getter.DeviceDriver, LanguageStrings, Getter.SlotDataWidth, Vcl.ComCtrls;
+  Getter.DeviceDriver, LanguageStrings, Getter.SlotSpeed, Vcl.ComCtrls;
 
 type
   TfMain = class(TForm)
@@ -87,13 +87,19 @@ end;
 
 procedure TfMain.RefreshGridPCI;
 var
-  SlotDataWidthGetter: TSlotDataWidthGetter;
+  SlotSpeedGetter: TSlotSpeedGetter;
+  SlotSpeed: TSlotMaxCurrSpeed;
 begin
-  SlotDataWidthGetter := TSlotDataWidthGetter.Create(
+  SlotSpeedGetter := TSlotSpeedGetter.Create(
     DriveList[cSelectDrive.ItemIndex].GetPathOfFileAccessing);
-  gValues.Cells[1, 4] := SlotDataWidthString[
-    SlotDataWidthGetter.GetSlotDataWidth];
-  FreeAndNil(SlotDataWidthGetter);
+  SlotSpeed := SlotSpeedGetter.GetSlotSpeed;
+  gValues.Cells[1, 4] :=
+    SlotSpecificationString[SlotSpeed.Current.SpecVersion] + ' x' +
+    IntToStr(Ord(SlotSpeed.Current.LinkWidth));
+  gValues.Cells[1, 5] :=
+    SlotSpecificationString[SlotSpeed.Maximum.SpecVersion] + ' x' +
+    IntToStr(Ord(SlotSpeed.Maximum.LinkWidth));
+  FreeAndNil(SlotSpeedGetter);
 end;
 
 procedure TfMain.tValuesChange(Sender: TObject);
@@ -210,10 +216,10 @@ const
 begin
   SMARTList := DriveList[cSelectDrive.ItemIndex].GetSMARTList;
   if SMARTList[CriticalWarningID].RAW = 0 then
-    gValues.Cells[1, 5] := Normal[CurrLang]
+    gValues.Cells[1, 6] := Normal[CurrLang]
   else
-    gValues.Cells[1, 5] := Warning[CurrLang];
-  gValues.Cells[1, 5] := gValues.Cells[1, 5] +
+    gValues.Cells[1, 6] := Warning[CurrLang];
+  gValues.Cells[1, 6] := gValues.Cells[1, 6] +
     IntToStr(SMARTList[AvailableSpare].RAW) + '%)';
 end;
 
@@ -381,7 +387,8 @@ begin
   AddRow(Model[CurrLang]);
   AddRow(FirmwareRevision[CurrLang]);
   AddRow(SerialNumber[CurrLang]);
-  AddRow(PCIDataWidth[CurrLang]);
+  AddRow(PCICurrentSpeed[CurrLang]);
+  AddRow(PCIMaxSpeed[CurrLang]);
   AddRow(Status[CurrLang]);
 end;
 
