@@ -22,7 +22,7 @@ type
     PDeviceInfoData: PSP_DevInfo_Data;
     ResultCache: TOSSlotMaxCurrSpeed;
     FDeviceID: String;
-    function IsFindingDeviceID: Boolean;
+    function DeviceIDFound: Boolean;
     procedure SetResultCache;
     function GetCurrentSpeed: TOSSlotSpeed;
     function GetMaximumSpeed: TOSSlotSpeed;
@@ -61,14 +61,14 @@ begin
     LastResult := SetupDiEnumDeviceInfo(FClassDeviceInformations, CurrentDevice,
       @DeviceInfoData);
     if LastResult then
-      if IsFindingDeviceID then
+      if DeviceIDFound then
         break;
     Inc(CurrentDevice);
   until not LastResult;
   result := ResultCache;
 end;
 
-function TIDtoSlotSpeedGetter.IsFindingDeviceID: Boolean;
+function TIDtoSlotSpeedGetter.DeviceIDFound: Boolean;
 var
   DeviceIDBuffer: Array[0..MAX_DEVICE_ID_LEN] of WCHAR;
   LastResult: Cardinal;
