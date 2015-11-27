@@ -2,6 +2,7 @@ program NVMeTools;
 
 uses
   Vcl.Forms,
+  Windows,
   Forms.Main in 'Forms\Forms.Main.pas' {fMain},
   BufferInterpreter.NVMe.Samsung in 'WindowsFileAPI\BufferInterpreter.NVMe.Samsung.pas',
   BufferInterpreter in 'WindowsFileAPI\BufferInterpreter.pas',
@@ -34,9 +35,16 @@ uses
   LanguageStrings in 'Modules\LanguageStrings.pas',
   Getter.SlotSpeed in 'Classes\Getter.SlotSpeed.pas',
   OS.SetupAPI in 'Modules\OS.SetupAPI.pas',
-  Getter.SlotSpeedByDeviceID in 'Classes\Getter.SlotSpeedByDeviceID.pas';
+  Getter.SlotSpeedByDeviceID in 'Classes\Getter.SlotSpeedByDeviceID.pas',
+  View.Tab.Basic in 'View\View.Tab.Basic.pas',
+  View.Tab in 'View\View.Tab.pas',
+  View.Tab.Driver in 'View\View.Tab.Driver.pas',
+  View.Tab.CriticalWarning in 'View\View.Tab.CriticalWarning.pas',
+  View.Tab.SMART in 'View\View.Tab.SMART.pas';
 
 {$R *.res}
+{$SETPEOPTFLAGS $140}
+{$SETPEFLAGS IMAGE_FILE_RELOCS_STRIPPED}
 
 begin
   Application.Initialize;
