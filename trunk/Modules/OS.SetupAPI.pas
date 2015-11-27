@@ -21,7 +21,7 @@ type
   TSP_DevInfo_Data = SP_DEVINFO_DATA;
   PDEVPROPKEY = ^TDEVPROPKEY;
   DEVPROPKEY = packed record
-    fmtid: TGUID ;
+    fmtid: TGUID;
     pid: Pointer;
   end;
   TDEVPROPKEY = DEVPROPKEY;

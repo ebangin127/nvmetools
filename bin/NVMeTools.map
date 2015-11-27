@@ -1,6 +1,6 @@
 
  Start         Length     Name                   Class
- 0001:00401000 00246F94H .text                   CODE
+ 0001:00401000 00246F58H .text                   CODE
  0002:00648000 00001638H .itext                  ICODE
  0003:0064A000 000055E8H .data                   DATA
  0004:00650000 000057D4H .bss                    BSS
@@ -107,11 +107,11 @@ Detailed map of segments
  0001:0023B4F8 0000025C C=CODE     S=.text    G=(none)   M=Getter.PhysicalDriveList.Auto ACBP=A9
  0001:0023B754 00000D5C C=CODE     S=.text    G=(none)   M=Getter.DeviceDriver ACBP=A9
  0001:0023C4B0 00000C8C C=CODE     S=.text    G=(none)   M=LanguageStrings ACBP=A9
- 0001:0023D13C 000000B8 C=CODE     S=.text    G=(none)   M=OS.SetupAPI ACBP=A9
- 0001:0023D1F4 00000570 C=CODE     S=.text    G=(none)   M=Getter.SlotSpeedByDeviceID ACBP=A9
- 0001:0023D764 00000A1C C=CODE     S=.text    G=(none)   M=Getter.SlotSpeed ACBP=A9
- 0001:0023E180 00001CDC C=CODE     S=.text    G=(none)   M=Forms.Main ACBP=A9
- 0001:0023FE5C 00007138 C=CODE     S=.text    G=(none)   M=NVMeTools ACBP=A9
+ 0001:0023D13C 000000B0 C=CODE     S=.text    G=(none)   M=OS.SetupAPI ACBP=A9
+ 0001:0023D1EC 0000053C C=CODE     S=.text    G=(none)   M=Getter.SlotSpeedByDeviceID ACBP=A9
+ 0001:0023D728 00000A1C C=CODE     S=.text    G=(none)   M=Getter.SlotSpeed ACBP=A9
+ 0001:0023E144 00001CDC C=CODE     S=.text    G=(none)   M=Forms.Main ACBP=A9
+ 0001:0023FE20 00007138 C=CODE     S=.text    G=(none)   M=NVMeTools ACBP=A9
  0002:00000000 000000B4 C=ICODE    S=.itext   G=(none)   M=System   ACBP=A9
  0002:000000B4 00000008 C=ICODE    S=.itext   G=(none)   M=SysInit  ACBP=A9
  0002:000000BC 00000018 C=ICODE    S=.itext   G=(none)   M=Winapi.Windows ACBP=A9
@@ -538,43 +538,43 @@ Detailed map of segments
  0001:00202CD4       Device.SMART.List.{System.Generics.Defaults}TComparer<Device.SMART.List.TSMARTValueEntry>.Default
  0001:00202F1C       Device.SMART.List.{System.Generics.Defaults}TDelegatedComparer<Device.SMART.List.TSMARTValueEntry>.Compare
  0001:00202EE0       Device.SMART.List.{System.Generics.Defaults}TDelegatedComparer<Device.SMART.List.TSMARTValueEntry>.Create
- 0001:0023E180       Forms.Main..TfMain
+ 0001:0023E144       Forms.Main..TfMain
  0003:00004D98       Forms.Main.BinaryPoint2
  0004:000057D0       Forms.Main.fMain
- 0001:0023F028       Forms.Main.LBAToMB
- 0001:0023EBA4       Forms.Main.TfMain.AddBasicColumn
- 0001:0023FBBC       Forms.Main.TfMain.AddBasicRow
- 0001:0023FA38       Forms.Main.TfMain.AddColumn
- 0001:0023FD44       Forms.Main.TfMain.AddCriticalWarningRow
- 0001:0023FB44       Forms.Main.TfMain.AddDriverRow
- 0001:0023FA7C       Forms.Main.TfMain.AddRow
- 0001:0023FC38       Forms.Main.TfMain.AddSMARTRow
- 0001:0023EB24       Forms.Main.TfMain.ClearRowColumn
- 0001:0023E650       Forms.Main.TfMain.cSelectDriveChange
- 0001:0023EB54       Forms.Main.TfMain.FillCellWithBoolean
- 0001:0023EE8C       Forms.Main.TfMain.FillGridRAWValue
- 0001:0023F05C       Forms.Main.TfMain.FillGridReadableValue
- 0001:0023F6E4       Forms.Main.TfMain.FormClose
- 0001:0023F868       Forms.Main.TfMain.FormCreate
- 0001:0023F884       Forms.Main.TfMain.FormKeyUp
- 0001:0023FAC0       Forms.Main.TfMain.FormResize
- 0001:0023F89C       Forms.Main.TfMain.RefreshDrives
- 0001:0023EBBC       Forms.Main.TfMain.RefreshGridBasic
- 0001:0023E9CC       Forms.Main.TfMain.RefreshGridCriticalWarning
- 0001:0023E674       Forms.Main.TfMain.RefreshGridDriver
- 0001:0023E7AC       Forms.Main.TfMain.RefreshGridPCI
- 0001:0023ED18       Forms.Main.TfMain.RefreshGridSMART
- 0001:0023ED2C       Forms.Main.TfMain.RefreshGridStatus
- 0001:0023FDBC       Forms.Main.TfMain.ResizeGrid
- 0001:0023FE28       Forms.Main.TfMain.ResizeGridColumn
- 0001:0023FAE8       Forms.Main.TfMain.ResizeTab
- 0001:0023E95C       Forms.Main.TfMain.SetBasicTab
- 0001:0023F700       Forms.Main.TfMain.SetCaption
- 0001:0023E994       Forms.Main.TfMain.SetCriticalWarningTab
- 0001:0023E978       Forms.Main.TfMain.SetDriverTab
- 0001:0023E9B0       Forms.Main.TfMain.SetSMARTTab
- 0001:0023F7CC       Forms.Main.TfMain.SetTabCaption
- 0001:0023E90C       Forms.Main.TfMain.tValuesChange
+ 0001:0023EFEC       Forms.Main.LBAToMB
+ 0001:0023EB68       Forms.Main.TfMain.AddBasicColumn
+ 0001:0023FB80       Forms.Main.TfMain.AddBasicRow
+ 0001:0023F9FC       Forms.Main.TfMain.AddColumn
+ 0001:0023FD08       Forms.Main.TfMain.AddCriticalWarningRow
+ 0001:0023FB08       Forms.Main.TfMain.AddDriverRow
+ 0001:0023FA40       Forms.Main.TfMain.AddRow
+ 0001:0023FBFC       Forms.Main.TfMain.AddSMARTRow
+ 0001:0023EAE8       Forms.Main.TfMain.ClearRowColumn
+ 0001:0023E614       Forms.Main.TfMain.cSelectDriveChange
+ 0001:0023EB18       Forms.Main.TfMain.FillCellWithBoolean
+ 0001:0023EE50       Forms.Main.TfMain.FillGridRAWValue
+ 0001:0023F020       Forms.Main.TfMain.FillGridReadableValue
+ 0001:0023F6A8       Forms.Main.TfMain.FormClose
+ 0001:0023F82C       Forms.Main.TfMain.FormCreate
+ 0001:0023F848       Forms.Main.TfMain.FormKeyUp
+ 0001:0023FA84       Forms.Main.TfMain.FormResize
+ 0001:0023F860       Forms.Main.TfMain.RefreshDrives
+ 0001:0023EB80       Forms.Main.TfMain.RefreshGridBasic
+ 0001:0023E990       Forms.Main.TfMain.RefreshGridCriticalWarning
+ 0001:0023E638       Forms.Main.TfMain.RefreshGridDriver
+ 0001:0023E770       Forms.Main.TfMain.RefreshGridPCI
+ 0001:0023ECDC       Forms.Main.TfMain.RefreshGridSMART
+ 0001:0023ECF0       Forms.Main.TfMain.RefreshGridStatus
+ 0001:0023FD80       Forms.Main.TfMain.ResizeGrid
+ 0001:0023FDEC       Forms.Main.TfMain.ResizeGridColumn
+ 0001:0023FAAC       Forms.Main.TfMain.ResizeTab
+ 0001:0023E920       Forms.Main.TfMain.SetBasicTab
+ 0001:0023F6C4       Forms.Main.TfMain.SetCaption
+ 0001:0023E958       Forms.Main.TfMain.SetCriticalWarningTab
+ 0001:0023E93C       Forms.Main.TfMain.SetDriverTab
+ 0001:0023E974       Forms.Main.TfMain.SetSMARTTab
+ 0001:0023F790       Forms.Main.TfMain.SetTabCaption
+ 0001:0023E8D0       Forms.Main.TfMain.tValuesChange
  0001:0023B7FC       Getter.DeviceDriver..TDeviceDriverGetter
  0001:0023BA50       Getter.DeviceDriver.TDeviceDriverGetter.ConnectToWMIObjectByMoniker
  0001:0023BEA8       Getter.DeviceDriver.TDeviceDriverGetter.GetControllerDeviceID
@@ -861,26 +861,26 @@ Detailed map of segments
  0001:0023AEA4       Getter.PhysicalDriveList.WMI.TWMIPhysicalDriveListGetter.IsHarddrive
  0001:0023B3DC       Getter.PhysicalDriveList.WMI.TWMIPhysicalDriveListGetter.TraverseResultAndAddFixedOrUSBDrive
  0001:0023B434       Getter.PhysicalDriveList.WMI.TWMIPhysicalDriveListGetter.TryToGetPhysicalDriveList
- 0001:0023D804       Getter.SlotSpeed..TSlotSpeedGetter
+ 0001:0023D7C8       Getter.SlotSpeed..TSlotSpeedGetter
  0003:00004D8C       Getter.SlotSpeed.SlotSpecificationString
- 0001:0023DAC0       Getter.SlotSpeed.TSlotSpeedGetter.ConnectToWMIObjectByMoniker
- 0001:0023DF18       Getter.SlotSpeed.TSlotSpeedGetter.GetControllerDeviceID
- 0001:0023DB60       Getter.SlotSpeed.TSlotSpeedGetter.GetDefaultMonikerFromObjectPath
- 0001:0023DBDC       Getter.SlotSpeed.TSlotSpeedGetter.GetLocalhostWMIRepositoryURI
- 0001:0023DB44       Getter.SlotSpeed.TSlotSpeedGetter.GetMonikerBindableContext
- 0001:0023DA54       Getter.SlotSpeed.TSlotSpeedGetter.GetOSSlotInformationByDeviceID
- 0001:0023DC3C       Getter.SlotSpeed.TSlotSpeedGetter.GetReferredObjectByMoniker
- 0001:0023D974       Getter.SlotSpeed.TSlotSpeedGetter.GetSlotSpeed
- 0001:0023DCC4       Getter.SlotSpeed.TSlotSpeedGetter.GetStorageDeviceID
- 0001:0023DA90       Getter.SlotSpeed.TSlotSpeedGetter.InterpretOSSlotSpeed
- 0001:0023D9C4       Getter.SlotSpeed.TSlotSpeedGetter.TryToGetSlotDataWidth
- 0001:0023D294       Getter.SlotSpeedByDeviceID..TIDtoSlotSpeedGetter
- 0001:0023D464       Getter.SlotSpeedByDeviceID.TIDtoSlotSpeedGetter.Create
- 0001:0023D6E4       Getter.SlotSpeedByDeviceID.TIDtoSlotSpeedGetter.GetCurrentSpeed
- 0001:0023D664       Getter.SlotSpeedByDeviceID.TIDtoSlotSpeedGetter.GetMaximumSpeed
- 0001:0023D51C       Getter.SlotSpeedByDeviceID.TIDtoSlotSpeedGetter.GetSlotSpeed
- 0001:0023D578       Getter.SlotSpeedByDeviceID.TIDtoSlotSpeedGetter.IsFindingDeviceID
- 0001:0023D614       Getter.SlotSpeedByDeviceID.TIDtoSlotSpeedGetter.SetResultCache
+ 0001:0023DA84       Getter.SlotSpeed.TSlotSpeedGetter.ConnectToWMIObjectByMoniker
+ 0001:0023DEDC       Getter.SlotSpeed.TSlotSpeedGetter.GetControllerDeviceID
+ 0001:0023DB24       Getter.SlotSpeed.TSlotSpeedGetter.GetDefaultMonikerFromObjectPath
+ 0001:0023DBA0       Getter.SlotSpeed.TSlotSpeedGetter.GetLocalhostWMIRepositoryURI
+ 0001:0023DB08       Getter.SlotSpeed.TSlotSpeedGetter.GetMonikerBindableContext
+ 0001:0023DA18       Getter.SlotSpeed.TSlotSpeedGetter.GetOSSlotInformationByDeviceID
+ 0001:0023DC00       Getter.SlotSpeed.TSlotSpeedGetter.GetReferredObjectByMoniker
+ 0001:0023D938       Getter.SlotSpeed.TSlotSpeedGetter.GetSlotSpeed
+ 0001:0023DC88       Getter.SlotSpeed.TSlotSpeedGetter.GetStorageDeviceID
+ 0001:0023DA54       Getter.SlotSpeed.TSlotSpeedGetter.InterpretOSSlotSpeed
+ 0001:0023D988       Getter.SlotSpeed.TSlotSpeedGetter.TryToGetSlotDataWidth
+ 0001:0023D28C       Getter.SlotSpeedByDeviceID..TIDtoSlotSpeedGetter
+ 0001:0023D45C       Getter.SlotSpeedByDeviceID.TIDtoSlotSpeedGetter.Create
+ 0001:0023D570       Getter.SlotSpeedByDeviceID.TIDtoSlotSpeedGetter.DeviceIDFound
+ 0001:0023D6A8       Getter.SlotSpeedByDeviceID.TIDtoSlotSpeedGetter.GetCurrentSpeed
+ 0001:0023D628       Getter.SlotSpeedByDeviceID.TIDtoSlotSpeedGetter.GetMaximumSpeed
+ 0001:0023D514       Getter.SlotSpeedByDeviceID.TIDtoSlotSpeedGetter.GetSlotSpeed
+ 0001:0023D60C       Getter.SlotSpeedByDeviceID.TIDtoSlotSpeedGetter.SetResultCache
  0004:000057CC       LanguageStrings..1
  0003:00004C6C       LanguageStrings.AvailableSpaceError
  0003:00004C9C       LanguageStrings.AvailableSpare
@@ -941,7 +941,7 @@ Detailed map of segments
  0003:00004BBC       MeasureUnit.DataSize.MegaUnit
  0003:00004BA4       MeasureUnit.DataSize.PetaUnit
  0003:00004BAC       MeasureUnit.DataSize.TeraUnit
- 0001:0023FE5C       NVMeTools.Finalization
+ 0001:0023FE20       NVMeTools.Finalization
  0002:000015E4       NVMeTools.NVMeTools
  0001:002040D4       OS.SecurityDescriptor..TSecurityDescriptorManipulator
  0003:00004B44       OS.SecurityDescriptor.AdminAccessTemplate
@@ -971,7 +971,6 @@ Detailed map of segments
  0001:0023D1DC       OS.SetupAPI.SetupDiEnumDeviceInfo
  0001:0023D1D4       OS.SetupAPI.SetupDiGetClassDevsW
  0001:0023D1CC       OS.SetupAPI.SetupDiGetDeviceProperty
- 0001:0023D1EC       OS.SetupAPI.SetupDiGetDeviceRegistryPropertyW
  0001:001FF6F4       OSFile..TOSFile
  0001:001FFD58       OSFile.TOSFile.Create
  0001:001FFB58       OSFile.TOSFile.DeletePrefix
@@ -30563,62 +30562,61 @@ Detailed map of segments
  0001:0023D1D4       OS.SetupAPI.SetupDiGetClassDevsW
  0001:0023D1DC       OS.SetupAPI.SetupDiEnumDeviceInfo
  0001:0023D1E4       OS.SetupAPI.CM_Get_Device_IDW
- 0001:0023D1EC       OS.SetupAPI.SetupDiGetDeviceRegistryPropertyW
- 0001:0023D294       Getter.SlotSpeedByDeviceID..TIDtoSlotSpeedGetter
- 0001:0023D464       Getter.SlotSpeedByDeviceID.TIDtoSlotSpeedGetter.Create
- 0001:0023D51C       Getter.SlotSpeedByDeviceID.TIDtoSlotSpeedGetter.GetSlotSpeed
- 0001:0023D578       Getter.SlotSpeedByDeviceID.TIDtoSlotSpeedGetter.IsFindingDeviceID
- 0001:0023D614       Getter.SlotSpeedByDeviceID.TIDtoSlotSpeedGetter.SetResultCache
- 0001:0023D664       Getter.SlotSpeedByDeviceID.TIDtoSlotSpeedGetter.GetMaximumSpeed
- 0001:0023D6E4       Getter.SlotSpeedByDeviceID.TIDtoSlotSpeedGetter.GetCurrentSpeed
- 0001:0023D804       Getter.SlotSpeed..TSlotSpeedGetter
- 0001:0023D974       Getter.SlotSpeed.TSlotSpeedGetter.GetSlotSpeed
- 0001:0023D9C4       Getter.SlotSpeed.TSlotSpeedGetter.TryToGetSlotDataWidth
- 0001:0023DA54       Getter.SlotSpeed.TSlotSpeedGetter.GetOSSlotInformationByDeviceID
- 0001:0023DA90       Getter.SlotSpeed.TSlotSpeedGetter.InterpretOSSlotSpeed
- 0001:0023DAC0       Getter.SlotSpeed.TSlotSpeedGetter.ConnectToWMIObjectByMoniker
- 0001:0023DB44       Getter.SlotSpeed.TSlotSpeedGetter.GetMonikerBindableContext
- 0001:0023DB60       Getter.SlotSpeed.TSlotSpeedGetter.GetDefaultMonikerFromObjectPath
- 0001:0023DBDC       Getter.SlotSpeed.TSlotSpeedGetter.GetLocalhostWMIRepositoryURI
- 0001:0023DC3C       Getter.SlotSpeed.TSlotSpeedGetter.GetReferredObjectByMoniker
- 0001:0023DCC4       Getter.SlotSpeed.TSlotSpeedGetter.GetStorageDeviceID
- 0001:0023DF18       Getter.SlotSpeed.TSlotSpeedGetter.GetControllerDeviceID
- 0001:0023E180       Forms.Main..TfMain
- 0001:0023E650       Forms.Main.TfMain.cSelectDriveChange
- 0001:0023E674       Forms.Main.TfMain.RefreshGridDriver
- 0001:0023E7AC       Forms.Main.TfMain.RefreshGridPCI
- 0001:0023E90C       Forms.Main.TfMain.tValuesChange
- 0001:0023E95C       Forms.Main.TfMain.SetBasicTab
- 0001:0023E978       Forms.Main.TfMain.SetDriverTab
- 0001:0023E994       Forms.Main.TfMain.SetCriticalWarningTab
- 0001:0023E9B0       Forms.Main.TfMain.SetSMARTTab
- 0001:0023E9CC       Forms.Main.TfMain.RefreshGridCriticalWarning
- 0001:0023EB24       Forms.Main.TfMain.ClearRowColumn
- 0001:0023EB54       Forms.Main.TfMain.FillCellWithBoolean
- 0001:0023EBA4       Forms.Main.TfMain.AddBasicColumn
- 0001:0023EBBC       Forms.Main.TfMain.RefreshGridBasic
- 0001:0023ED18       Forms.Main.TfMain.RefreshGridSMART
- 0001:0023ED2C       Forms.Main.TfMain.RefreshGridStatus
- 0001:0023EE8C       Forms.Main.TfMain.FillGridRAWValue
- 0001:0023F028       Forms.Main.LBAToMB
- 0001:0023F05C       Forms.Main.TfMain.FillGridReadableValue
- 0001:0023F6E4       Forms.Main.TfMain.FormClose
- 0001:0023F700       Forms.Main.TfMain.SetCaption
- 0001:0023F7CC       Forms.Main.TfMain.SetTabCaption
- 0001:0023F868       Forms.Main.TfMain.FormCreate
- 0001:0023F884       Forms.Main.TfMain.FormKeyUp
- 0001:0023F89C       Forms.Main.TfMain.RefreshDrives
- 0001:0023FA38       Forms.Main.TfMain.AddColumn
- 0001:0023FA7C       Forms.Main.TfMain.AddRow
- 0001:0023FAC0       Forms.Main.TfMain.FormResize
- 0001:0023FAE8       Forms.Main.TfMain.ResizeTab
- 0001:0023FB44       Forms.Main.TfMain.AddDriverRow
- 0001:0023FBBC       Forms.Main.TfMain.AddBasicRow
- 0001:0023FC38       Forms.Main.TfMain.AddSMARTRow
- 0001:0023FD44       Forms.Main.TfMain.AddCriticalWarningRow
- 0001:0023FDBC       Forms.Main.TfMain.ResizeGrid
- 0001:0023FE28       Forms.Main.TfMain.ResizeGridColumn
- 0001:0023FE5C       NVMeTools.Finalization
+ 0001:0023D28C       Getter.SlotSpeedByDeviceID..TIDtoSlotSpeedGetter
+ 0001:0023D45C       Getter.SlotSpeedByDeviceID.TIDtoSlotSpeedGetter.Create
+ 0001:0023D514       Getter.SlotSpeedByDeviceID.TIDtoSlotSpeedGetter.GetSlotSpeed
+ 0001:0023D570       Getter.SlotSpeedByDeviceID.TIDtoSlotSpeedGetter.DeviceIDFound
+ 0001:0023D60C       Getter.SlotSpeedByDeviceID.TIDtoSlotSpeedGetter.SetResultCache
+ 0001:0023D628       Getter.SlotSpeedByDeviceID.TIDtoSlotSpeedGetter.GetMaximumSpeed
+ 0001:0023D6A8       Getter.SlotSpeedByDeviceID.TIDtoSlotSpeedGetter.GetCurrentSpeed
+ 0001:0023D7C8       Getter.SlotSpeed..TSlotSpeedGetter
+ 0001:0023D938       Getter.SlotSpeed.TSlotSpeedGetter.GetSlotSpeed
+ 0001:0023D988       Getter.SlotSpeed.TSlotSpeedGetter.TryToGetSlotDataWidth
+ 0001:0023DA18       Getter.SlotSpeed.TSlotSpeedGetter.GetOSSlotInformationByDeviceID
+ 0001:0023DA54       Getter.SlotSpeed.TSlotSpeedGetter.InterpretOSSlotSpeed
+ 0001:0023DA84       Getter.SlotSpeed.TSlotSpeedGetter.ConnectToWMIObjectByMoniker
+ 0001:0023DB08       Getter.SlotSpeed.TSlotSpeedGetter.GetMonikerBindableContext
+ 0001:0023DB24       Getter.SlotSpeed.TSlotSpeedGetter.GetDefaultMonikerFromObjectPath
+ 0001:0023DBA0       Getter.SlotSpeed.TSlotSpeedGetter.GetLocalhostWMIRepositoryURI
+ 0001:0023DC00       Getter.SlotSpeed.TSlotSpeedGetter.GetReferredObjectByMoniker
+ 0001:0023DC88       Getter.SlotSpeed.TSlotSpeedGetter.GetStorageDeviceID
+ 0001:0023DEDC       Getter.SlotSpeed.TSlotSpeedGetter.GetControllerDeviceID
+ 0001:0023E144       Forms.Main..TfMain
+ 0001:0023E614       Forms.Main.TfMain.cSelectDriveChange
+ 0001:0023E638       Forms.Main.TfMain.RefreshGridDriver
+ 0001:0023E770       Forms.Main.TfMain.RefreshGridPCI
+ 0001:0023E8D0       Forms.Main.TfMain.tValuesChange
+ 0001:0023E920       Forms.Main.TfMain.SetBasicTab
+ 0001:0023E93C       Forms.Main.TfMain.SetDriverTab
+ 0001:0023E958       Forms.Main.TfMain.SetCriticalWarningTab
+ 0001:0023E974       Forms.Main.TfMain.SetSMARTTab
+ 0001:0023E990       Forms.Main.TfMain.RefreshGridCriticalWarning
+ 0001:0023EAE8       Forms.Main.TfMain.ClearRowColumn
+ 0001:0023EB18       Forms.Main.TfMain.FillCellWithBoolean
+ 0001:0023EB68       Forms.Main.TfMain.AddBasicColumn
+ 0001:0023EB80       Forms.Main.TfMain.RefreshGridBasic
+ 0001:0023ECDC       Forms.Main.TfMain.RefreshGridSMART
+ 0001:0023ECF0       Forms.Main.TfMain.RefreshGridStatus
+ 0001:0023EE50       Forms.Main.TfMain.FillGridRAWValue
+ 0001:0023EFEC       Forms.Main.LBAToMB
+ 0001:0023F020       Forms.Main.TfMain.FillGridReadableValue
+ 0001:0023F6A8       Forms.Main.TfMain.FormClose
+ 0001:0023F6C4       Forms.Main.TfMain.SetCaption
+ 0001:0023F790       Forms.Main.TfMain.SetTabCaption
+ 0001:0023F82C       Forms.Main.TfMain.FormCreate
+ 0001:0023F848       Forms.Main.TfMain.FormKeyUp
+ 0001:0023F860       Forms.Main.TfMain.RefreshDrives
+ 0001:0023F9FC       Forms.Main.TfMain.AddColumn
+ 0001:0023FA40       Forms.Main.TfMain.AddRow
+ 0001:0023FA84       Forms.Main.TfMain.FormResize
+ 0001:0023FAAC       Forms.Main.TfMain.ResizeTab
+ 0001:0023FB08       Forms.Main.TfMain.AddDriverRow
+ 0001:0023FB80       Forms.Main.TfMain.AddBasicRow
+ 0001:0023FBFC       Forms.Main.TfMain.AddSMARTRow
+ 0001:0023FD08       Forms.Main.TfMain.AddCriticalWarningRow
+ 0001:0023FD80       Forms.Main.TfMain.ResizeGrid
+ 0001:0023FDEC       Forms.Main.TfMain.ResizeGridColumn
+ 0001:0023FE20       NVMeTools.Finalization
  0002:00000000       System.System
  0002:000000B4       SysInit.SysInit
  0002:000000BC       Winapi.Windows.Winapi.Windows

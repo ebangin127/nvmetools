@@ -15,9 +15,7 @@ type
     function DataSetManagement(StartLBA, LBACount: Int64): Cardinal;
       override;
     procedure Flush; override;
-
     function IsDataSetManagementSupported: Boolean; override;
-
   private
     type
       SCSI_COMMAND_DESCRIPTOR_BLOCK = record
@@ -61,15 +59,12 @@ type
         SenseBuffer: SCSI_24B_SENSE_BUFFER;
         Buffer: T512Buffer;
       end;
-
     const
       SCSI_IOCTL_DATA_OUT = 0;
       SCSI_IOCTL_DATA_IN = 1;
       SCSI_IOCTL_DATA_UNSPECIFIED = 2;
-
   private
     IoInnerBuffer: SCSI_WITH_BUFFER;
-
     function GetCommonBuffer: SCSI_WITH_BUFFER;
     function GetCommonCommandDescriptorBlock: SCSI_COMMAND_DESCRIPTOR_BLOCK;
     procedure SetInnerBufferAsFlagsAndCdb(Flags: ULONG;
@@ -131,7 +126,7 @@ procedure TSamsungNVMeCommandSet.SetInnerBufferAsFlagsAndCdb
   (Flags: ULONG; CommandDescriptorBlock: SCSI_COMMAND_DESCRIPTOR_BLOCK);
 begin
   IoInnerBuffer := GetCommonBuffer;
-	IoInnerBuffer.Parameter.DataIn := Flags;
+  IoInnerBuffer.Parameter.DataIn := Flags;
   IoInnerBuffer.Parameter.CommandDescriptorBlock := CommandDescriptorBlock;
 end;
 

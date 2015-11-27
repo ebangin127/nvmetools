@@ -33,7 +33,7 @@ type
 
 implementation
 
-{ TSlotInformationGetter }
+{ TIDtoSlotSpeedGetter }
 
 constructor TIDtoSlotSpeedGetter.Create;
 const
@@ -82,18 +82,9 @@ begin
 end;
 
 procedure TIDtoSlotSpeedGetter.SetResultCache;
-var
-  PropertyRegDataType: DWORD;
-  ResultBuffer: array[0..1023] of char;
-  RequiredSize: DWORD;
 begin
-  if SetupDiGetDeviceRegistryPropertyW(FClassDeviceInformations, DeviceInfoData,
-    SPDRP_DEVICEDESC, PropertyRegDataType, @ResultBuffer, sizeof(ResultBuffer),
-    RequiredSize) then
-  begin
-    ResultCache.Maximum := GetMaximumSpeed;
-    ResultCache.Current := GetCurrentSpeed;
-  end;
+  ResultCache.Maximum := GetMaximumSpeed;
+  ResultCache.Current := GetCurrentSpeed;
 end;
 
 function TIDtoSlotSpeedGetter.GetMaximumSpeed: TOSSlotSpeed;
@@ -102,11 +93,11 @@ var
   RequiredSize: DWORD;
   PropertyType: DEVPROPTYPE;
 begin
-  if SetupDiGetDeviceProperty (FClassDeviceInformations, @DeviceInfoData,
+  if SetupDiGetDeviceProperty(FClassDeviceInformations, @DeviceInfoData,
     @DEVPKEY_PciDevice_MaxLinkSpeed, PropertyType, @ResultBuffer,
     sizeof(ResultBuffer), @RequiredSize, 0) then
       result.SpecVersion := Ord(ResultBuffer[0]);
-  if SetupDiGetDeviceProperty (FClassDeviceInformations, @DeviceInfoData,
+  if SetupDiGetDeviceProperty(FClassDeviceInformations, @DeviceInfoData,
     @DEVPKEY_PciDevice_MaxLinkWidth, PropertyType, @ResultBuffer,
     sizeof(ResultBuffer), @RequiredSize, 0) then
       result.LinkWidth := Ord(ResultBuffer[0]);
@@ -118,11 +109,11 @@ var
   RequiredSize: DWORD;
   PropertyType: DEVPROPTYPE;
 begin
-  if SetupDiGetDeviceProperty (FClassDeviceInformations, @DeviceInfoData,
+  if SetupDiGetDeviceProperty(FClassDeviceInformations, @DeviceInfoData,
     @DEVPKEY_PciDevice_CurrentLinkSpeed, PropertyType, @ResultBuffer,
     sizeof(ResultBuffer), @RequiredSize, 0) then
       result.SpecVersion := Ord(ResultBuffer[0]);
-  if SetupDiGetDeviceProperty (FClassDeviceInformations, @DeviceInfoData,
+  if SetupDiGetDeviceProperty(FClassDeviceInformations, @DeviceInfoData,
     @DEVPKEY_PciDevice_CurrentLinkWidth, PropertyType, @ResultBuffer,
     sizeof(ResultBuffer), @RequiredSize, 0) then
       result.LinkWidth := Ord(ResultBuffer[0]);
