@@ -148,7 +148,7 @@ procedure TSamsungNVMeCommandSet.SetInnerBufferToSendIdentifyDeviceCommand;
 const
   SecurityOutCommand = $B5;
   SamsungProtocol = $FE;
-  ProtocolSpecific = 5;
+  Identify = 5;
   TransferLength = $40;
 var
   CommandDescriptorBlock: SCSI_COMMAND_DESCRIPTOR_BLOCK;
@@ -156,7 +156,7 @@ begin
   CommandDescriptorBlock := GetCommonCommandDescriptorBlock;
   CommandDescriptorBlock.SCSICommand := SecurityOutCommand;
   CommandDescriptorBlock.MiscellaneousCDBInformation := SamsungProtocol;
-  CommandDescriptorBlock.LogicalBlockAddress[1] := ProtocolSpecific;
+  CommandDescriptorBlock.LogicalBlockAddress[1] := Identify;
   CommandDescriptorBlock.LogicalBlockAddress[7] := TransferLength;
   SetInnerBufferAsFlagsAndCdb(SCSI_IOCTL_DATA_OUT, CommandDescriptorBlock);
   SetBufferForIdentifyDeviceCommand;
@@ -164,9 +164,9 @@ end;
 
 procedure TSamsungNVMeCommandSet.SetBufferForIdentifyDeviceCommand;
 const
-  IdentifyDevice = 1;
+  ReturnToHost = 1;
 begin
-  IOInnerBuffer.Buffer[0] := IdentifyDevice;
+  IOInnerBuffer.Buffer[0] := ReturnToHost;
 end;
 
 procedure TSamsungNVMeCommandSet.SetBufferAndReceiveIdentifyDeviceCommand;
@@ -181,7 +181,7 @@ procedure TSamsungNVMeCommandSet.SetInnerBufferToReceiveIdentifyDeviceCommand;
 const
   SecurityInCommand = $A2;
   SamsungProtocol = $FE;
-  ProtocolSpecific = 5;
+  Identify = 5;
   TransferLength = 1;
 var
   CommandDescriptorBlock: SCSI_COMMAND_DESCRIPTOR_BLOCK;
@@ -189,7 +189,7 @@ begin
   CommandDescriptorBlock := GetCommonCommandDescriptorBlock;
   CommandDescriptorBlock.SCSICommand := SecurityInCommand;
   CommandDescriptorBlock.MiscellaneousCDBInformation := SamsungProtocol;
-  CommandDescriptorBlock.LogicalBlockAddress[1] := ProtocolSpecific;
+  CommandDescriptorBlock.LogicalBlockAddress[1] := Identify;
   CommandDescriptorBlock.LogicalBlockAddress[6] := TransferLength;
   SetInnerBufferAsFlagsAndCdb(SCSI_IOCTL_DATA_IN, CommandDescriptorBlock);
 end;
@@ -298,7 +298,7 @@ procedure TSamsungNVMeCommandSet.SetInnerBufferToSendSMARTCommand;
 const
   SecurityOutCommand = $B5;
   SamsungProtocol = $FE;
-  ProtocolSpecific = 6;
+  GetLogPage = 6;
   TransferLength = $40;
 var
   CommandDescriptorBlock: SCSI_COMMAND_DESCRIPTOR_BLOCK;
@@ -314,7 +314,7 @@ end;
 
 procedure TSamsungNVMeCommandSet.SetBufferForSMARTCommand;
 const
-  GetLogPage = 2;
+  SMARTHealthInformation = 2;
   GlobalLogPage = $FF;
 begin
   IOInnerBuffer.Buffer[0] := GetLogPage;
@@ -337,7 +337,7 @@ const
   SecurityInCommand = $A2;
   SamsungProtocol = $FE;
   AllPages = $08;
-  ProtocolSpecific = 6;
+  GetLogPage = 6;
   TransferLength = 1;
 var
   CommandDescriptorBlock: SCSI_COMMAND_DESCRIPTOR_BLOCK;
