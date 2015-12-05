@@ -1,6 +1,6 @@
 # Naraeon NVMe Tools
 
-Naraeon NVMe Tools is an open source NVMe SMART / Health Information Log Viewer.
+Naraeon NVMe Tools is an open source NVMe SMART / Health Information Log Viewer on Windows.
 
 License: GPL 3.0
 
