@@ -67,7 +67,7 @@ function TVendorInterpreter.FormatAsMinute(const Value: UInt64): String;
       result := Plural[CurrLang];
   end;
 begin
-  result := UIntToStr(Value) + ' ' + Hour[CurrLang] + GetPlural(Value);
+  result := UIntToStr(Value) + ' ' + Minute[CurrLang] + GetPlural(Value);
 end;
 
 function TVendorInterpreter.FormatAsPercent(const Value: UInt64): String;

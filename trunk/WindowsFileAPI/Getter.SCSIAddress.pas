@@ -21,8 +21,6 @@ type
     function GetSCSIAddress: SCSI_ADDRESS;
   protected
     function GetMinimumPrivilege: TCreateFileDesiredAccess; override;
-  private
-    IoInnerBuffer: TIoControlIOBuffer;
   end;
 
 implementation

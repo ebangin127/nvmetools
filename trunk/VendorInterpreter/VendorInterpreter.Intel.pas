@@ -222,7 +222,7 @@ var
 begin
   Entry := FSMARTValueList.GetEntryByID(Ord(IDTimedWorkloadMediaWear));
   result.Name := TimedWorkloadMediaWear[CurrLang];
-  result.Value := Format('%.3f', [Entry.RAW / 1024]) + ' %';
+  result.Value := Format('%.3f', [Entry.RAW / 1024 * 100]) + ' %';
 end;
 
 function TIntelVendorInterpreter.GetTimedWorkloadHostReadWriteRatio:
