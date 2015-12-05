@@ -64,7 +64,7 @@ type
 
 implementation
 
-{ TIntelNVMeCommandSet }
+{ TIntelNVMePortCommandSet }
 
 function TIntelNVMePortCommandSet.IdentifyDevice: TIdentifyDeviceResult;
 begin
@@ -110,7 +110,7 @@ const
   IntelNVMePassThough = $E0002000;
 begin
   FillChar(result, SizeOf(result), #0);
-  result.SrbIoCtrl.ControlCode := $E0002000;
+  result.SrbIoCtrl.ControlCode := IntelNVMePassThough;
   result.SrbIoCtrl.HeaderLength := sizeof(SRB_IO_CONTROL);
   CopyMemory(@result.SrbIoCtrl.Signature[0], @NVME_SIG_STR[1],
     Length(NVME_SIG_STR));

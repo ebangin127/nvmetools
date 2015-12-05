@@ -179,13 +179,13 @@
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment>
-                <DeployFile LocalName="..\bin\NVMeTools.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="..\bin\NVMeTools.exe" Configuration="Release" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>NVMeTools.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\bin\NVMeTools.exe" Configuration="Release" Class="ProjectOutput">
+                <DeployFile LocalName="..\bin\NVMeTools.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>NVMeTools.exe</RemoteName>
                         <Overwrite>true</Overwrite>

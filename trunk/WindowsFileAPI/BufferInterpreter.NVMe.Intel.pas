@@ -154,7 +154,7 @@ end;
 function TIntelBufferInterpreter.TemperatureSMARTValueList(
   Buffer: TLargeBuffer): TSMARTValueList;
 const
-  TemperatureValueLength = 1;
+  TemperatureValueLength = 8;
   CurrentTemperature = 0;
   HighestTemperature = 24;
   LowestTemperature = 32;
@@ -192,7 +192,7 @@ begin
   Entry.RAW := 0;
   RAWStart := StartPoint;
   RAWEnd := RAWStart + LengthOfValue - 1;
-  for CurrentRAW := RAWStart to RAWEnd do
+  for CurrentRAW := RAWEnd downto RAWStart do
   begin
     Entry.RAW := Entry.RAW shl 8;
     Entry.RAW :=

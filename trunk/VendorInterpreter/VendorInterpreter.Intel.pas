@@ -277,8 +277,7 @@ var
 begin
   Entry := FSMARTValueList.GetEntryByID(Ord(IDRetryBufferOverflowCount));
   result.Name := RetryBufferOverflowCount[CurrLang];
-  result.Value := FormatAsRepeat(Entry.RAW) + ' (' +
-    FormatAsPercent(Entry.Current) + ')';
+  result.Value := FormatAsRepeat(Entry.RAW);
 end;
 
 function TIntelVendorInterpreter.GetPLLLockLossCount: TInterpretedSMARTEntry;
@@ -287,8 +286,7 @@ var
 begin
   Entry := FSMARTValueList.GetEntryByID(Ord(IDPLLLockLossCount));
   result.Name := PLLLockLossCount[CurrLang];
-  result.Value := FormatAsRepeat(Entry.RAW) + ' (' +
-    FormatAsPercent(Entry.Current) + ')';
+  result.Value := FormatAsRepeat(Entry.RAW);
 end;
 
 function TIntelVendorInterpreter.GetNANDBytesWritten: TInterpretedSMARTEntry;
@@ -300,8 +298,7 @@ var
 begin
   Entry := FSMARTValueList.GetEntryByID(Ord(IDNANDBytesWritten));
   result.Name := NANDBytesWritten[CurrLang];
-  result.Value := FormatAsLBA(Entry.RAW * IntelUnit * MiBtoLBA) + ' (' +
-    FormatAsPercent(Entry.Current) + ')';
+  result.Value := FormatAsLBA(Entry.RAW * IntelUnit * MiBtoLBA);
 end;
 
 function TIntelVendorInterpreter.GetHostBytesWritten: TInterpretedSMARTEntry;
@@ -313,8 +310,7 @@ var
 begin
   Entry := FSMARTValueList.GetEntryByID(Ord(IDHostBytesWritten));
   result.Name := HostBytesWritten[CurrLang];
-  result.Value := FormatAsLBA(Entry.RAW * IntelUnit * MiBtoLBA) + ' (' +
-    FormatAsPercent(Entry.Current) + ')';
+  result.Value := FormatAsLBA(Entry.RAW * IntelUnit * MiBtoLBA);
 end;
 
 end.
