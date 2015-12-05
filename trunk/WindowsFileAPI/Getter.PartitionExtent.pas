@@ -61,7 +61,7 @@ implementation
 
 constructor TPartitionExtentGetter.Create(FileToGetAccess: String);
 begin
-  CreateHandle(FileToGetAccess, DesiredReadWrite);
+  CreateHandle(FileToGetAccess, DesiredReadOnly);
 end;
 
 function TPartitionExtentGetter.QueryDosDeviceSystemCall

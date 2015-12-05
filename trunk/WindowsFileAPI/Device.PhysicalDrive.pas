@@ -17,10 +17,8 @@ type
     function GetNCQAvailability: TNCQAvailability;
     function GetPathOfFileAccessing: String;
     function GetPathOfFileAccessingWithoutPrefix: String;
-
     property IdentifyDeviceResult: TIdentifyDeviceResult
       read GetIdentifyDeviceResult;
-
     property DiskSizeInByte: TLargeInteger
       read GetDiskSizeInByte;
     property IsDriveAvailable: Boolean

@@ -122,7 +122,7 @@ begin
 
   result := GetSizeUnitString(SizeInMB, MegaUnit, Setting);
   if result = '' then
-    result := '0MB';
+    result := '0 MB';
 end;
 
 end.

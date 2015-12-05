@@ -21,6 +21,8 @@ const
     ('드라이버', 'Driver');
   SMART: TLanguageString =
     ('수명 관련 정보', 'SMART');
+  VendorSpecificSMART: TLanguageString =
+    ('추가 수명 정보', 'Vendor Specific SMART');
 
   DriverName: TLanguageString =
     ('드라이버 이름', 'Driver Name');

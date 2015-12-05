@@ -4,7 +4,6 @@ uses
   Vcl.Forms,
   Windows,
   Forms.Main in 'Forms\Forms.Main.pas' {fMain},
-  BufferInterpreter.NVMe.Samsung in 'WindowsFileAPI\BufferInterpreter.NVMe.Samsung.pas',
   BufferInterpreter in 'WindowsFileAPI\BufferInterpreter.pas',
   CommandSet.Factory in 'WindowsFileAPI\CommandSet.Factory.pas',
   CommandSet.NVMe.Samsung in 'WindowsFileAPI\CommandSet.NVMe.Samsung.pas',
@@ -40,7 +39,20 @@ uses
   View.Tab in 'View\View.Tab.pas',
   View.Tab.Driver in 'View\View.Tab.Driver.pas',
   View.Tab.CriticalWarning in 'View\View.Tab.CriticalWarning.pas',
-  View.Tab.SMART in 'View\View.Tab.SMART.pas';
+  View.Tab.SMART in 'View\View.Tab.SMART.pas',
+  CommandSet.SAT in 'WindowsFileAPI\CommandSet.SAT.pas',
+  BufferInterpreter.ATA in 'WindowsFileAPI\BufferInterpreter.ATA.pas',
+  CommandSet.NVMe in 'WindowsFileAPI\CommandSet.NVMe.pas',
+  BufferInterpreter.NVMe in 'WindowsFileAPI\BufferInterpreter.NVMe.pas',
+  CommandSet.NVMe.Intel in 'WindowsFileAPI\CommandSet.NVMe.Intel.pas',
+  Getter.SCSIAddress in 'WindowsFileAPI\Getter.SCSIAddress.pas',
+  CommandSet.NVMe.Intel.PortPart in 'WindowsFileAPI\CommandSet.NVMe.Intel.PortPart.pas',
+  BufferInterpreter.NVMe.Intel in 'WindowsFileAPI\BufferInterpreter.NVMe.Intel.pas',
+  View.Tab.VendorSpecificSMART in 'View\View.Tab.VendorSpecificSMART.pas',
+  VendorInterpreter in 'VendorInterpreter\VendorInterpreter.pas',
+  VendorInterpreter.Intel in 'VendorInterpreter\VendorInterpreter.Intel.pas',
+  LanguageStrings.Intel in 'Modules\LanguageStrings.Intel.pas',
+  VendorInterpreter.Factory in 'VendorInterpreter\VendorInterpreter.Factory.pas';
 
 {$R *.res}
 {$SETPEOPTFLAGS $140}

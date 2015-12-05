@@ -35,6 +35,8 @@ type
          GetNTFSVolumeData,
          GetDriveGeometryEX,
          OSLevelTrim,
+         ScsiMiniport,
+         GetScsiAddress,
          Unknown);
 
     function IoControl(
@@ -45,6 +47,8 @@ type
       IOBuffer: TIoControlIOBuffer): Cardinal;
     function BuildOSBufferBy<InputType, OutputType>(var InputBuffer: InputType;
       var OutputBuffer: OutputType): TIoControlIOBuffer;
+    function BuildOSBufferByOutput<OutputType>(var OutputBuffer: OutputType):
+      TIoControlIOBuffer;
 
   private
     function DeviceIoControlSystemCall(
@@ -91,6 +95,14 @@ begin
   result.OutputBuffer.Buffer := @OutputBuffer;
 end;
 
+function TIoControlFile.BuildOSBufferByOutput<OutputType>(
+  var OutputBuffer: OutputType): TIoControlIOBuffer;
+begin
+  FillChar(result, SizeOf(result), #0);
+  result.OutputBuffer.Size := SizeOf(OutputBuffer);
+  result.OutputBuffer.Buffer := @OutputBuffer;
+end;
+
 function TIoControlFile.DeviceIoControlSystemCall(
   OSControlCode: Integer;
   IOBuffer: TIoControlIOBuffer): Cardinal;
@@ -118,11 +130,19 @@ const
     (IOCTL_SCSI_BASE shl 16) or
     ((FILE_READ_ACCESS or FILE_WRITE_ACCESS) shl 14) or ($0401 shl 2) or
     (METHOD_BUFFERED);
+  IOCTL_SCSI_MINIPORT =
+    (IOCTL_SCSI_BASE shl 16) or
+    ((FILE_READ_ACCESS or FILE_WRITE_ACCESS) shl 14) or ($0402 shl 2) or
+    (METHOD_BUFFERED);
   IOCTL_STORAGE_MANAGE_DATA_SET_ATTRIBUTES =
     (IOCTL_STORAGE_BASE shl 16) or
     (FILE_WRITE_ACCESS shl 14) or ($0501 shl 2) or
     (METHOD_BUFFERED);
-  
+  IOCTL_SCSI_GET_ADDRESS =
+    (IOCTL_SCSI_BASE shl 16) or
+    (FILE_ANY_ACCESS shl 14) or ($0406 shl 2) or
+    (METHOD_BUFFERED);
+
   OSControlCodeOfIoControlCode: Array[TIoControlCode] of Integer =
     (IOCTL_ATA_PASS_THROUGH,
      IOCTL_ATA_PASS_THROUGH_DIRECT,
@@ -134,6 +154,8 @@ const
      FSCTL_GET_NTFS_VOLUME_DATA,
      IOCTL_DISK_GET_DRIVE_GEOMETRY_EX,
      IOCTL_STORAGE_MANAGE_DATA_SET_ATTRIBUTES,
+     IOCTL_SCSI_MINIPORT,
+     IOCTL_SCSI_GET_ADDRESS,
      0);
 begin
   if ControlCode = TIoControlCode.Unknown then

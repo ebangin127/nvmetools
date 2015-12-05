@@ -104,7 +104,6 @@
         <DCCReference Include="Forms\Forms.Main.pas">
             <Form>fMain</Form>
         </DCCReference>
-        <DCCReference Include="WindowsFileAPI\BufferInterpreter.NVMe.Samsung.pas"/>
         <DCCReference Include="WindowsFileAPI\BufferInterpreter.pas"/>
         <DCCReference Include="WindowsFileAPI\CommandSet.Factory.pas"/>
         <DCCReference Include="WindowsFileAPI\CommandSet.NVMe.Samsung.pas"/>
@@ -141,6 +140,19 @@
         <DCCReference Include="View\View.Tab.Driver.pas"/>
         <DCCReference Include="View\View.Tab.CriticalWarning.pas"/>
         <DCCReference Include="View\View.Tab.SMART.pas"/>
+        <DCCReference Include="WindowsFileAPI\CommandSet.SAT.pas"/>
+        <DCCReference Include="WindowsFileAPI\BufferInterpreter.ATA.pas"/>
+        <DCCReference Include="WindowsFileAPI\CommandSet.NVMe.pas"/>
+        <DCCReference Include="WindowsFileAPI\BufferInterpreter.NVMe.pas"/>
+        <DCCReference Include="WindowsFileAPI\CommandSet.NVMe.Intel.pas"/>
+        <DCCReference Include="WindowsFileAPI\Getter.SCSIAddress.pas"/>
+        <DCCReference Include="WindowsFileAPI\CommandSet.NVMe.Intel.PortPart.pas"/>
+        <DCCReference Include="WindowsFileAPI\BufferInterpreter.NVMe.Intel.pas"/>
+        <DCCReference Include="View\View.Tab.VendorSpecificSMART.pas"/>
+        <DCCReference Include="VendorInterpreter\VendorInterpreter.pas"/>
+        <DCCReference Include="VendorInterpreter\VendorInterpreter.Intel.pas"/>
+        <DCCReference Include="Modules\LanguageStrings.Intel.pas"/>
+        <DCCReference Include="VendorInterpreter\VendorInterpreter.Factory.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -167,13 +179,13 @@
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment>
-                <DeployFile LocalName="..\bin\NVMeTools.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="..\bin\NVMeTools.exe" Configuration="Release" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>NVMeTools.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\bin\NVMeTools.exe" Configuration="Release" Class="ProjectOutput">
+                <DeployFile LocalName="..\bin\NVMeTools.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>NVMeTools.exe</RemoteName>
                         <Overwrite>true</Overwrite>

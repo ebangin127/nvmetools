@@ -6,7 +6,8 @@ uses
   Device.SMART.List;
 
 type
-  T512Buffer = Array[0..511] of Byte;
+  TSmallBuffer = Array[0..511] of Byte;
+  TLargeBuffer = Array[0..4096] of Byte;
   TStorageInterface =
     (Probing, ATA, SAT, SCSI, UnknownInterface);
   TSATASpeed =
@@ -25,9 +26,13 @@ type
   TBufferInterpreter = class abstract
   public
     function BufferToIdentifyDeviceResult
-      (Buffer: T512Buffer): TIdentifyDeviceResult; virtual; abstract;
+      (Buffer: TSmallBuffer): TIdentifyDeviceResult; virtual; abstract;
     function BufferToSMARTValueList
-      (Buffer: T512Buffer): TSMARTValueList; virtual; abstract;
+      (Buffer: TSmallBuffer): TSMARTValueList; virtual; abstract;
+    function LargeBufferToIdentifyDeviceResult
+      (Buffer: TLargeBuffer): TIdentifyDeviceResult; virtual; abstract;
+    function LargeBufferToSMARTValueList
+      (Buffer: TLargeBuffer): TSMARTValueList; virtual; abstract;
   end;
 
 implementation

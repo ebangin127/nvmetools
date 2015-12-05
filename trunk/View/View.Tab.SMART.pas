@@ -155,7 +155,7 @@ const
 begin
   ValueList[Ord(TSMARTID.IDDataUnitsRead)] := FormatSizeInMB(LBAToMB(
     StrToInt64(ValueList[Ord(TSMARTID.IDDataUnitsRead)])), BinaryPoint2);
-  ValueList[Ord(TSMARTID.IDDataUnitsRead)] := FormatSizeInMB(LBAToMB(
+  ValueList[Ord(TSMARTID.IDDataUnitsWritten)] := FormatSizeInMB(LBAToMB(
     StrToInt64(ValueList[Ord(TSMARTID.IDDataUnitsWritten)])), BinaryPoint2);
 end;
 

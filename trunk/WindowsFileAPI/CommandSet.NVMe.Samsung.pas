@@ -4,18 +4,14 @@ interface
 
 uses
   Windows, SysUtils,
-  OSFile.IoControl, CommandSet, BufferInterpreter, Device.SMART.List,
-  BufferInterpreter.NVMe.Samsung;
+  OSFile.IoControl, CommandSet.NVMe, BufferInterpreter, Device.SMART.List,
+  BufferInterpreter.NVMe;
 
 type
-  TSamsungNVMeCommandSet = class sealed(TCommandSet)
+  TSamsungNVMeCommandSet = class sealed(TNVMeCommandSet)
   public
     function IdentifyDevice: TIdentifyDeviceResult; override;
     function SMARTReadData: TSMARTValueList; override;
-    function DataSetManagement(StartLBA, LBACount: Int64): Cardinal;
-      override;
-    procedure Flush; override;
-    function IsDataSetManagementSupported: Boolean; override;
   private
     type
       SCSI_COMMAND_DESCRIPTOR_BLOCK = record
@@ -57,7 +53,7 @@ type
       SCSI_WITH_BUFFER = record
         Parameter: SCSI_PASS_THROUGH;
         SenseBuffer: SCSI_24B_SENSE_BUFFER;
-        Buffer: T512Buffer;
+        Buffer: TSmallBuffer;
       end;
     const
       SCSI_IOCTL_DATA_OUT = 0;
@@ -71,9 +67,6 @@ type
       CommandDescriptorBlock: SCSI_COMMAND_DESCRIPTOR_BLOCK);
     function InterpretIdentifyDeviceBuffer: TIdentifyDeviceResult;
     procedure SetBufferAndIdentifyDevice;
-    procedure SetBufferAndReadCapacity;
-    procedure SetInnerBufferToReadCapacity;
-    function InterpretReadCapacityBuffer: TIdentifyDeviceResult;
     function InterpretSMARTBuffer: TSMARTValueList;
     procedure SetBufferAndSMART;
     procedure SetInnerBufferToReceiveSMARTCommand;
@@ -86,10 +79,6 @@ type
     procedure SetBufferForIdentifyDeviceCommand;
     procedure SetBufferAndReceiveIdentifyDeviceCommand;
     procedure SetInnerBufferToReceiveIdentifyDeviceCommand;
-    procedure SetUnmapHeader;
-    procedure SetUnmapLBA(StartLBA: Int64);
-    procedure SetUnmapLBACount(LBACount: Int64);
-    procedure SetInnerBufferToUnmap(const StartLBA, LBACount: Int64);
   end;
 
 implementation
@@ -194,21 +183,12 @@ begin
   SetInnerBufferAsFlagsAndCdb(SCSI_IOCTL_DATA_IN, CommandDescriptorBlock);
 end;
 
-procedure TSamsungNVMeCommandSet.SetUnmapHeader;
-const
-  HeaderSize = 6;
-  ContentSize = 16;
-begin
-  IoInnerBuffer.Buffer[1] := HeaderSize + ContentSize;
-  IoInnerBuffer.Buffer[3] := ContentSize;
-end;
-
 function TSamsungNVMeCommandSet.InterpretIdentifyDeviceBuffer:
   TIdentifyDeviceResult;
 var
-  SCSIBufferInterpreter: TSamsungNVMeBufferInterpreter;
+  SCSIBufferInterpreter: TNVMeBufferInterpreter;
 begin
-  SCSIBufferInterpreter := TSamsungNVMeBufferInterpreter.Create;
+  SCSIBufferInterpreter := TNVMeBufferInterpreter.Create;
   result :=
     SCSIBufferInterpreter.BufferToIdentifyDeviceResult(IoInnerBuffer.Buffer);
   FreeAndNil(SCSIBufferInterpreter);
@@ -216,37 +196,12 @@ end;
 
 function TSamsungNVMeCommandSet.InterpretSMARTBuffer: TSMARTValueList;
 var
-  SCSIBufferInterpreter: TSamsungNVMeBufferInterpreter;
+  SCSIBufferInterpreter: TNVMeBufferInterpreter;
 begin
-  SCSIBufferInterpreter := TSamsungNVMeBufferInterpreter.Create;
+  SCSIBufferInterpreter := TNVMeBufferInterpreter.Create;
   result :=
     SCSIBufferInterpreter.BufferToSMARTValueList(IoInnerBuffer.Buffer);
   FreeAndNil(SCSIBufferInterpreter);
-end;
-
-procedure TSamsungNVMeCommandSet.SetBufferAndReadCapacity;
-begin
-  SetInnerBufferToReadCapacity;
-  IoControl(TIoControlCode.SCSIPassThrough,
-    BuildOSBufferBy<SCSI_WITH_BUFFER, SCSI_WITH_BUFFER>(IoInnerBuffer,
-      IoInnerBuffer));
-end;
-
-procedure TSamsungNVMeCommandSet.SetInnerBufferToReadCapacity;
-const
-  ReadCapacityCommand = $9E;
-  AllocationLowBit = 3;
-var
-  CommandDescriptorBlock: SCSI_COMMAND_DESCRIPTOR_BLOCK;
-begin
-  CommandDescriptorBlock := GetCommonCommandDescriptorBlock;
-  CommandDescriptorBlock.SCSICommand := ReadCapacityCommand;
-  CommandDescriptorBlock.MiscellaneousCDBInformation := $10;
-  CommandDescriptorBlock.TransferParameterListAllocationLength[
-    AllocationLowBit - 1] := (512 shr 8) and $FF;
-  CommandDescriptorBlock.TransferParameterListAllocationLength[
-    AllocationLowBit] := 512 and $FF;
-  SetInnerBufferAsFlagsAndCdb(SCSI_IOCTL_DATA_IN, CommandDescriptorBlock);
 end;
 
 function TSamsungNVMeCommandSet.IdentifyDevice: TIdentifyDeviceResult;
@@ -261,17 +216,6 @@ begin
   result.UserSizeInKB := ReadCapacityResult.UserSizeInKB;
   result.LBASize := ReadCapacityResult.LBASize;
   result.IsDataSetManagementSupported := IsDataSetManagementSupported;
-end;
-
-function TSamsungNVMeCommandSet.InterpretReadCapacityBuffer:
-  TIdentifyDeviceResult;
-var
-  SCSIBufferInterpreter: TSamsungNVMeBufferInterpreter;
-begin
-  SCSIBufferInterpreter := TSamsungNVMeBufferInterpreter.Create;
-  result :=
-    SCSIBufferInterpreter.BufferToCapacityAndLBA(IoInnerBuffer.Buffer);
-  FreeAndNil(SCSIBufferInterpreter);
 end;
 
 function TSamsungNVMeCommandSet.SMARTReadData: TSMARTValueList;
@@ -306,7 +250,7 @@ begin
   CommandDescriptorBlock := GetCommonCommandDescriptorBlock;
   CommandDescriptorBlock.SCSICommand := SecurityOutCommand;
   CommandDescriptorBlock.MiscellaneousCDBInformation := SamsungProtocol;
-  CommandDescriptorBlock.LogicalBlockAddress[1] := ProtocolSpecific;
+  CommandDescriptorBlock.LogicalBlockAddress[1] := GetLogPage;
   CommandDescriptorBlock.LogicalBlockAddress[7] := TransferLength;
   SetInnerBufferAsFlagsAndCdb(SCSI_IOCTL_DATA_OUT, CommandDescriptorBlock);
   SetBufferForSMARTCommand;
@@ -317,7 +261,7 @@ const
   SMARTHealthInformation = 2;
   GlobalLogPage = $FF;
 begin
-  IOInnerBuffer.Buffer[0] := GetLogPage;
+  IOInnerBuffer.Buffer[0] := SMARTHealthInformation;
   IOInnerBuffer.Buffer[4] := GlobalLogPage;
   IOInnerBuffer.Buffer[5] := GlobalLogPage;
   IOInnerBuffer.Buffer[6] := GlobalLogPage;
@@ -345,84 +289,9 @@ begin
   CommandDescriptorBlock := GetCommonCommandDescriptorBlock;
   CommandDescriptorBlock.SCSICommand := SecurityInCommand;
   CommandDescriptorBlock.MiscellaneousCDBInformation := SamsungProtocol;
-  CommandDescriptorBlock.LogicalBlockAddress[1] := ProtocolSpecific;
+  CommandDescriptorBlock.LogicalBlockAddress[1] := GetLogPage;
   CommandDescriptorBlock.LogicalBlockAddress[6] := TransferLength;
   SetInnerBufferAsFlagsAndCdb(SCSI_IOCTL_DATA_IN, CommandDescriptorBlock);
-end;
-
-procedure TSamsungNVMeCommandSet.Flush;
-const
-  FlushCommand = $91;
-var
-  CommandDescriptorBlock: SCSI_COMMAND_DESCRIPTOR_BLOCK;
-begin
-  CommandDescriptorBlock := GetCommonCommandDescriptorBlock;
-  CommandDescriptorBlock.SCSICommand := FlushCommand;
-  SetInnerBufferAsFlagsAndCdb(SCSI_IOCTL_DATA_UNSPECIFIED,
-    CommandDescriptorBlock);
-  IoControl(TIoControlCode.SCSIPassThrough,
-    BuildOSBufferBy<SCSI_WITH_BUFFER, SCSI_WITH_BUFFER>(IoInnerBuffer,
-      IoInnerBuffer));
-end;
-
-function TSamsungNVMeCommandSet.IsDataSetManagementSupported: Boolean;
-begin
-  exit(true);
-end;
-
-procedure TSamsungNVMeCommandSet.SetUnmapLBA(StartLBA: Int64);
-const
-  StartLBAHi = 10;
-begin
-  IoInnerBuffer.Buffer[StartLBAHi + 5] := StartLBA and 255;
-  StartLBA := StartLBA shr 8;
-  IoInnerBuffer.Buffer[StartLBAHi + 4] := StartLBA and 255;
-  StartLBA := StartLBA shr 8;
-  IoInnerBuffer.Buffer[StartLBAHi + 3] := StartLBA and 255;
-  StartLBA := StartLBA shr 8;
-  IoInnerBuffer.Buffer[StartLBAHi + 2] := StartLBA and 255;
-  StartLBA := StartLBA shr 8;
-  IoInnerBuffer.Buffer[StartLBAHi + 1] := StartLBA and 255;
-  StartLBA := StartLBA shr 8;
-  IoInnerBuffer.Buffer[StartLBAHi] := StartLBA;
-end;
-
-procedure TSamsungNVMeCommandSet.SetUnmapLBACount(LBACount: Int64);
-const
-  LBACountHi = 16;
-begin
-  IoInnerBuffer.Buffer[LBACountHi + 3] := LBACount and 255;
-  LBACount := LBACount shr 8;
-  IoInnerBuffer.Buffer[LBACountHi + 2] := LBACount and 255;
-  LBACount := LBACount shr 8;
-  IoInnerBuffer.Buffer[LBACountHi + 1] := LBACount and 255;
-  LBACount := LBACount shr 8;
-  IoInnerBuffer.Buffer[LBACountHi] := LBACount shr 8;
-end;
-
-procedure TSamsungNVMeCommandSet.SetInnerBufferToUnmap(const StartLBA, LBACount:
-  Int64);
-var
-  CommandDescriptorBlock: SCSI_COMMAND_DESCRIPTOR_BLOCK;
-const
-  UnmapCommand = $42;
-begin
-  CommandDescriptorBlock := GetCommonCommandDescriptorBlock;
-  CommandDescriptorBlock.SCSICommand := UnmapCommand;
-  CommandDescriptorBlock.LogicalBlockAddress[6] := 24;
-  SetInnerBufferAsFlagsAndCdb(SCSI_IOCTL_DATA_OUT, CommandDescriptorBlock);
-  SetUnmapHeader;
-  SetUnmapLBA(StartLBA);
-  SetUnmapLBACount(LBACount);
-end;
-
-function TSamsungNVMeCommandSet.DataSetManagement(StartLBA, LBACount: Int64):
-  Cardinal;
-begin
-  SetInnerBufferToUnmap(StartLBA, LBACount);
-  result := ExceptionFreeIoControl(TIoControlCode.SCSIPassThrough,
-    BuildOSBufferBy<SCSI_WITH_BUFFER, SCSI_WITH_BUFFER>(IoInnerBuffer,
-      IoInnerBuffer));
 end;
 
 end.
