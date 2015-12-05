@@ -3,6 +3,7 @@ unit VendorInterpreter.Factory;
 interface
 
 uses
+  SysUtils,
   VendorInterpreter, VendorInterpreter.Intel;
 
 type
@@ -62,7 +63,7 @@ begin
   result := TVendorInterpreterToTry.Create(FModel, FFirmware);
 
   if not result.GetSupportStatus then
-    result.Free;
+    FreeAndNil(result);
 end;
 
 initialization

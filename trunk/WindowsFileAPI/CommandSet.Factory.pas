@@ -5,7 +5,7 @@ interface
 uses
   Windows, SysUtils, Dialogs,
   CommandSet, BufferInterpreter,
-  CommandSet.NVMe.Intel;
+  CommandSet.NVMe.Intel, CommandSet.NVMe.Samsung;
 
 type
   TMetaCommandSet = class of TCommandSet;
@@ -52,6 +52,7 @@ function TCommandSetFactory.TryCommandSetsAndGetRightSet: TCommandSet;
 begin
   result := nil;
   result := TestCommandSetCompatibility(TIntelNVMeCommandSet, result);
+  result := TestCommandSetCompatibility(TSamsungNVMeCommandSet, result);
 end;
 
 function TCommandSetFactory.TestCommandSetCompatibility
