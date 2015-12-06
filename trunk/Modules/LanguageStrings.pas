@@ -42,6 +42,8 @@ const
 
   Model: TLanguageString =
     ('모델', 'Model');
+  Capacity: TLanguageString =
+    ('용량', 'Capacity');
   FirmwareRevision: TLanguageString =
     ('펌웨어', 'Firmware');
   SerialNumber: TLanguageString =
@@ -116,6 +118,9 @@ const
 
   ToRefreshPress: TLanguageString =
     ('새로고침', 'Refresh');
+  NoSupported: TLanguageString =
+    ('검출된 NVMe 제품이 없습니다',
+     'Naraeon NVMe Tools can''t find any NVMe devices');
 
 procedure DetermineLanguage;
 

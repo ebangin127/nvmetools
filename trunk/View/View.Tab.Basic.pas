@@ -4,7 +4,7 @@ interface
 
 uses
   SysUtils,
-  View.Tab, Device.SMART.List, Getter.SlotSpeed;
+  View.Tab, Device.SMART.List, Getter.SlotSpeed, MeasureUnit.DataSize;
 
 type
   TBasicTab = class sealed(TTab)
@@ -19,6 +19,7 @@ type
     procedure FillPCIStatus;
     procedure FillFinalStatus;
     function GetSlotSpeed: TSlotMaxCurrSpeed;
+    function GetCapacity: String;
   protected
     procedure FillTab; override;
   end;
@@ -40,6 +41,7 @@ end;
 procedure TBasicTab.FillBasics;
 begin
   AddRow(Model[CurrLang], GetModel);
+  AddRow(Capacity[CurrLang], GetCapacity);
   AddRow(FirmwareRevision[CurrLang], GetFirmwareRevision);
   AddRow(SerialNumber[CurrLang], GetSerialNumber);
 end;
@@ -71,6 +73,37 @@ end;
 function TBasicTab.GetModel: String;
 begin
   result := GetSelectedDrive.IdentifyDeviceResult.Model;
+end;
+
+function TBasicTab.GetCapacity: String;
+  function KBtoDenaryMB(SizeInBinaryKiB: Double): Double;
+  var
+    KBtoMB: TDatasizeUnitChangeSetting;
+  begin
+    KBtoMB.FNumeralSystem := Denary;
+    KBtoMB.FFromUnit := KiloUnit;
+    KBtoMB.FToUnit := MegaUnit;
+
+    result :=
+      ChangeDatasizeUnit(
+        SizeInBinaryKiB,
+        KBtoMB);
+  end;
+  function FormatSizeInDenaryIntegerMB(SizeInDenaryMB: Double): String;
+  var
+    DenaryInteger: TFormatSizeSetting;
+  begin
+    DenaryInteger.FNumeralSystem := Denary;
+    DenaryInteger.FPrecision := 0;
+
+    result := FormatSizeInMB(SizeInDenaryMB, DenaryInteger);
+  end;
+var
+  DenaryUserSizeInMB: Double;
+begin
+  DenaryUserSizeInMB := KBtoDenaryMB(
+    GetSelectedDrive.IdentifyDeviceResult.UserSizeInKB);
+  result := FormatSizeInDenaryIntegerMB(DenaryUserSizeInMB);
 end;
 
 function TBasicTab.GetFirmwareRevision: String;

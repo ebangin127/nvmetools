@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Grids,
-  Vcl.StdCtrls, Vcl.ComCtrls,
+  Vcl.StdCtrls, Vcl.ComCtrls, UITypes,
   Getter.PhysicalDriveList.Auto, Device.PhysicalDrive.List,
   Device.PhysicalDrive, LanguageStrings, View.Tab, View.Tab.Basic,
   View.Tab.Driver, View.Tab.CriticalWarning, View.Tab.SMART,
@@ -22,10 +22,14 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure tValuesChange(Sender: TObject);
+    procedure gValuesClick(Sender: TObject);
   public
     procedure ResizeGridColumn;
   private
     DriveList: TPhysicalDriveList;
+    LastDrive: Integer;
+    DisplaySerial: Boolean;
+    OriginalSerial: String;
     procedure RefreshDrives;
     procedure SetCaption;
     procedure ResizeGrid;
@@ -37,6 +41,11 @@ type
     procedure RefreshVendorSpecificTab;
     procedure AddVendorSpecificTab;
     procedure DeleteVendorSpecificTab;
+    procedure IfNoSupportedClose;
+    function GetMaxTextWidth: Cardinal;
+    procedure RefreshScreen;
+    procedure HideSerial;
+    procedure ShowSerial;
   end;
 
 var
@@ -55,10 +64,11 @@ end;
 
 procedure TfMain.cSelectDriveChange(Sender: TObject);
 begin
-  if cSelectDrive.ItemIndex >= 0 then
+  if (cSelectDrive.ItemIndex >= 0) and
+    (cSelectDrive.ItemIndex <> LastDrive) then
   begin
-    RefreshVendorSpecificTab;
-    tValuesChange(tValues);
+    RefreshScreen;
+    LastDrive := cSelectDrive.ItemIndex;
   end;
 end;
 
@@ -100,6 +110,8 @@ var
 begin
   if InvalidIndex then
     exit;
+  if (tValues.TabIndex = BasicTab) and (not DisplaySerial) then
+    ShowSerial;
   case tValues.TabIndex of
     BasicTab:
       CurrentTab := TBasicTab.Create(DriveList[cSelectDrive.ItemIndex]);
@@ -116,6 +128,8 @@ begin
   end;
   CurrentTab.ShowTab;
   FreeAndNil(CurrentTab);
+  if (tValues.TabIndex = BasicTab) and (not DisplaySerial) then
+    HideSerial;
 end;
 
 procedure TfMain.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -125,7 +139,7 @@ end;
 
 procedure TfMain.SetCaption;
 begin
-  Caption := 'Naraeon NVMe Tools Alpha 3 (' +
+  Caption := 'Naraeon NVMe Tools Alpha 4 (' +
     ToRefreshPress[CurrLang] + ' - F5)';
 end;
 
@@ -149,15 +163,26 @@ end;
 
 procedure TfMain.FormCreate(Sender: TObject);
 begin
+  LastDrive := -1;
   SetCaption;
   SetTabCaption;
   RefreshDrives;
+  IfNoSupportedClose;
+end;
+
+procedure TfMain.IfNoSupportedClose;
+begin
+  if cSelectDrive.Items.Count = 0 then
+  begin
+    MessageDlg(NoSupported[CurrLang], mtError, [mbOK], 0);
+    Application.Terminate;
+  end;
 end;
 
 procedure TfMain.FormKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   if Key = VK_F5 then
-    cSelectDriveChange(cSelectDrive);
+    RefreshScreen;
 end;
 
 procedure TfMain.RefreshDrives;
@@ -216,10 +241,89 @@ const
   ProperColumns = 2;
   FixedColumn = 0;
   ValueColumn = 1;
-  Padding = 8;
+  Padding = 12;
 begin
+  fMain.gValues.ColWidths[FixedColumn] :=
+    GetMaxTextWidth + Padding;
   if fMain.gValues.ColCount >= ProperColumns then
     fMain.gValues.ColWidths[ValueColumn] := fMain.gValues.Width -
       fMain.gValues.ColWidths[FixedColumn] - Padding;
+end;
+
+function TfMain.GetMaxTextWidth: Cardinal;
+const
+  FixedColumn = 0;
+var
+  TestingBitmap: TBitmap;
+  CurrentRow: Integer;
+  CurrentWidth: Cardinal;
+begin
+  TestingBitmap := TBitmap.Create;
+  result := 0;
+  try
+    TestingBitmap.Canvas.Font.Assign(gValues.Font);
+    for CurrentRow := 1 to gValues.RowCount - 1 do
+    begin
+      CurrentWidth := TestingBitmap.Canvas.TextWidth(
+        gValues.Cells[FixedColumn, CurrentRow]);
+      if CurrentWidth > result then
+        result := CurrentWidth;
+    end;
+  finally
+    TestingBitmap.Free;
+  end;
+end;
+
+procedure TfMain.gValuesClick(Sender: TObject);
+const
+  SerialTab = 0;
+  SerialCol = 1;
+  SerialRow = 4;
+begin
+  if (tValues.TabIndex = SerialTab) and
+    (gValues.Col = SerialCol) and (gValues.Row = SerialRow) then
+  begin
+    DisplaySerial := not DisplaySerial;
+    if DisplaySerial then
+      ShowSerial
+    else
+      HideSerial;
+  end;
+end;
+
+procedure TfMain.RefreshScreen;
+begin
+  if cSelectDrive.ItemIndex < 0 then
+    exit;
+  RefreshVendorSpecificTab;
+  tValuesChange(tValues);
+  if not DisplaySerial then
+    HideSerial;
+end;
+
+procedure TfMain.HideSerial;
+const
+  SerialTab = 0;
+  SerialCol = 1;
+  SerialRow = 4;
+var
+  HiddenSerial: String;
+  CurrentChar: Integer;
+begin
+  if (tValues.TabIndex <> SerialTab) or (OriginalSerial <> '') then
+    exit;
+  OriginalSerial := gValues.Cells[SerialCol, SerialRow];
+  for CurrentChar := 0 to Length(OriginalSerial) - 1 do
+    HiddenSerial := HiddenSerial + 'X';
+  gValues.Cells[SerialCol, SerialRow] := HiddenSerial;
+end;
+
+procedure TfMain.ShowSerial;
+const
+  SerialCol = 1;
+  SerialRow = 4;
+begin
+  gValues.Cells[SerialCol, SerialRow] := OriginalSerial;
+  OriginalSerial := '';
 end;
 end.

@@ -47,7 +47,9 @@ object fMain: TfMain
       ColCount = 3
       DefaultColWidth = 400
       RowCount = 2
+      Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine]
       TabOrder = 0
+      OnClick = gValuesClick
       RowHeights = (
         24
         24)
