@@ -60,6 +60,8 @@ type
     procedure SetBufferAndSMART(const LogIdentifier: Cardinal);
     procedure SetInnerBufferToSMARTCommand(const LogIdentifier: Cardinal);
     function InterpretIntelSpecificSMARTBuffer: TSMARTValueList;
+    procedure AppendAndFree(var Destination: TSMARTValueList;
+      const Source: TSMARTValueList);
   end;
 
 implementation
@@ -143,24 +145,30 @@ const
   SMARTHealthInformation = 2;
   IntelSpecific = $CA;
   Temperature = $C5;
-var
-  ListToAppend: TSMARTValueList;
 begin
+  result := nil;
   SetBufferAndSMART(SMARTHealthInformation);
-  result := InterpretSMARTBuffer;
+  AppendAndFree(result, InterpretSMARTBuffer);
   SetBufferAndSMART(IntelSpecific);
-  ListToAppend := InterpretIntelSpecificSMARTBuffer;
-  result.AddRange(ListToAppend.ToArray);
-  FreeAndNil(ListToAppend);
+  AppendAndFree(result, InterpretIntelSpecificSMARTBuffer);
   SetBufferAndSMART(Temperature);
-  ListToAppend := InterpretIntelSpecificSMARTBuffer;
-  result.AddRange(ListToAppend.ToArray);
-  FreeAndNil(ListToAppend);
+  AppendAndFree(result, InterpretIntelSpecificSMARTBuffer);
+end;
+
+procedure TIntelNVMePortCommandSet.AppendAndFree(
+  var Destination: TSMARTValueList;
+  const Source: TSMARTValueList);
+begin
+  if Destination = nil then
+    Destination := TSMARTValueList.Create;
+  Destination.AddRange(Source.ToArray);
+  Source.Free;
 end;
 
 procedure TIntelNVMePortCommandSet.SetBufferAndSMART(
   const LogIdentifier: Cardinal);
 begin
+  FillChar(IoInnerBuffer, SizeOf(IoInnerBuffer), #0);
   SetInnerBufferToSMARTCommand(LogIdentifier);
   IoControl(TIoControlCode.ScsiMiniport,
     BuildOSBufferBy<NVME_WITH_BUFFER, NVME_WITH_BUFFER>(IoInnerBuffer,

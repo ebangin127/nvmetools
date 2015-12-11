@@ -756,7 +756,7 @@ BEGIN
 	System_SysConst_SIntOverflow,	L"Integer overflow"
 END
 
-/* f:\embarcadero\studio\15.0\lib\Win32\release\Controls.res */
+/* f:\delphi\embarcadero\studio\15.0\lib\Win32\release\Controls.res */
 /* E:\UnivProject\NVMeTools\trunk\Forms\Forms.Main.dfm */
 /* E:\UnivProject\NVMeTools\trunk\NVMeTools.res */
 /* E:\UnivProject\NVMeTools\trunk\NVMeTools.drf */

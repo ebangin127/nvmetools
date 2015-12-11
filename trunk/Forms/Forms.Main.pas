@@ -42,7 +42,7 @@ type
     procedure AddVendorSpecificTab;
     procedure DeleteVendorSpecificTab;
     procedure IfNoSupportedClose;
-    function GetMaxTextWidth: Cardinal;
+    function GetMaxTextWidth(const Column: Integer): Cardinal;
     procedure RefreshScreen;
     procedure HideSerial;
     procedure ShowSerial;
@@ -238,21 +238,16 @@ end;
 
 procedure TfMain.ResizeGridColumn;
 const
-  ProperColumns = 2;
-  FixedColumn = 0;
-  ValueColumn = 1;
   Padding = 12;
+var
+  CurrentColumn: Integer;
 begin
-  fMain.gValues.ColWidths[FixedColumn] :=
-    GetMaxTextWidth + Padding;
-  if fMain.gValues.ColCount >= ProperColumns then
-    fMain.gValues.ColWidths[ValueColumn] := fMain.gValues.Width -
-      fMain.gValues.ColWidths[FixedColumn] - Padding;
+  for CurrentColumn := 0 to gValues.ColCount - 1 do
+    fMain.gValues.ColWidths[CurrentColumn] :=
+      GetMaxTextWidth(CurrentColumn) + Padding;
 end;
 
-function TfMain.GetMaxTextWidth: Cardinal;
-const
-  FixedColumn = 0;
+function TfMain.GetMaxTextWidth(const Column: Integer): Cardinal;
 var
   TestingBitmap: TBitmap;
   CurrentRow: Integer;
@@ -265,7 +260,7 @@ begin
     for CurrentRow := 1 to gValues.RowCount - 1 do
     begin
       CurrentWidth := TestingBitmap.Canvas.TextWidth(
-        gValues.Cells[FixedColumn, CurrentRow]);
+        gValues.Cells[Column, CurrentRow]);
       if CurrentWidth > result then
         result := CurrentWidth;
     end;

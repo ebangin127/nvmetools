@@ -51,8 +51,8 @@ end;
 function TCommandSetFactory.TryCommandSetsAndGetRightSet: TCommandSet;
 begin
   result := nil;
-  result := TestCommandSetCompatibility(TIntelNVMeCommandSet, result);
   result := TestCommandSetCompatibility(TSamsungNVMeCommandSet, result);
+  result := TestCommandSetCompatibility(TIntelNVMeCommandSet, result);
 end;
 
 function TCommandSetFactory.TestCommandSetCompatibility

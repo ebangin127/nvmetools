@@ -51,10 +51,10 @@ end;
 function TVendorInterpreter.FormatAsLBA(const Value: UInt64): String;
   function LBAToMB(const SizeInLBA: UInt64): Double;
   begin
-    result := SizeInLBA * 0.5 / 1024 * 1000;
+    result := SizeInLBA * 0.5;
   end;
 const
-  BinaryPoint2: TFormatSizeSetting = (FNumeralSystem: Binary; FPrecision: 2);
+  BinaryPoint2: TFormatSizeSetting = (FNumeralSystem: Binary; FPrecision: 1);
 begin
   result := FormatSizeInMB(LBAToMB(Value), BinaryPoint2);
 end;

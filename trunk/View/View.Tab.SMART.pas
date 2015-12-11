@@ -148,10 +148,10 @@ end;
 procedure TSMARTTab.SetReadWriteLBAValues(const ValueList: TStringList);
   function LBAToMB(const SizeInLBA: Int64): Double;
   begin
-    result := SizeInLBA * 0.5 / 1024 * 1000;
+    result := SizeInLBA * 0.5;
   end;
 const
-  BinaryPoint2: TFormatSizeSetting = (FNumeralSystem: Binary; FPrecision: 2);
+  BinaryPoint2: TFormatSizeSetting = (FNumeralSystem: Binary; FPrecision: 1);
 begin
   ValueList[Ord(TSMARTID.IDDataUnitsRead)] := FormatSizeInMB(LBAToMB(
     StrToInt64(ValueList[Ord(TSMARTID.IDDataUnitsRead)])), BinaryPoint2);
