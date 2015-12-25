@@ -62,7 +62,7 @@ type
 
 implementation
 
-{ TDeviceFile }
+{ TIoControlFile }
 
 function TIoControlFile.ExceptionFreeIoControl(ControlCode: TIoControlCode;
   IOBuffer: TIoControlIOBuffer): Cardinal;
