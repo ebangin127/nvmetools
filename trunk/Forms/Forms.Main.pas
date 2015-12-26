@@ -259,7 +259,7 @@ begin
   result := 0;
   try
     TestingBitmap.Canvas.Font.Assign(gValues.Font);
-    for CurrentRow := 1 to gValues.RowCount - 1 do
+    for CurrentRow := 0 to gValues.RowCount - 1 do
     begin
       CurrentWidth := TestingBitmap.Canvas.TextWidth(
         gValues.Cells[Column, CurrentRow]);
