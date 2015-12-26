@@ -11,15 +11,13 @@ type
     Size: Cardinal;
     Buffer: Pointer;
   end;
-
   TIoControlIOBuffer = record
     InputBuffer: TIoControlSingleBuffer;
     OutputBuffer: TIoControlSingleBuffer;
   end;
 
   EInvalidIoControlCode = class(Exception);
-
-  EWrongIoControlCode = class(Exception);
+  ENoDataReturnedFromIO = class(Exception);
 
   TIoControlFile = class abstract(TOSFileWithHandle)
   protected
@@ -38,7 +36,6 @@ type
          ScsiMiniport,
          GetScsiAddress,
          Unknown);
-
     function IoControl(
       ControlCode: TIoControlCode;
       IOBuffer: TIoControlIOBuffer): Cardinal;
@@ -49,7 +46,6 @@ type
       var OutputBuffer: OutputType): TIoControlIOBuffer;
     function BuildOSBufferByOutput<OutputType>(var OutputBuffer: OutputType):
       TIoControlIOBuffer;
-
   private
     function DeviceIoControlSystemCall(
       OSControlCode: Integer;
@@ -57,8 +53,6 @@ type
     function TDeviceIoControlCodeToOSControlCode
       (ControlCode: TIoControlCode): Integer;
   end;
-
-  ENoDataReturnedFromIO = class(Exception);
 
 implementation
 

@@ -4,9 +4,7 @@ interface
 
 uses
   Windows, ActiveX, ComObj, Variants, SysUtils, Dialogs,
-  OSFile, Getter.PhysicalDriveList, Device.PhysicalDrive,
-  Device.PhysicalDrive.List, CommandSet.Factory,
-  Getter.SlotSpeedByDeviceID;
+  OSFile, Getter.SlotSpeedByDeviceID;
 
 type
   TPCIeSpecification = (PCIe1d0 = 1, PCIe2d0 = 2, PCIe3d0 = 3);

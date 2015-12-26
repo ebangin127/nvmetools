@@ -47,9 +47,12 @@ begin
   PortCommandSet := TIntelNVMePortCommandSet.Create(
     SCSIPrefix + IntToStr(SCSIAddressGetter.GetSCSIAddress.PortNumber) +
     SCSIPostFix);
-  result := PortCommandSet.IdentifyDevice;
-  FreeAndNil(PortCommandSet);
-  FreeAndNil(SCSIAddressGetter);
+  try
+    result := PortCommandSet.IdentifyDevice;
+  finally
+    FreeAndNil(PortCommandSet);
+    FreeAndNil(SCSIAddressGetter);
+  end;
 end;
 
 function TIntelNVMeCommandSet.SMARTReadData: TSMARTValueList;

@@ -83,7 +83,7 @@ type
 
 implementation
 
-{ TSamsungNVMeCommandSet }
+{ TNVMeCommandSet }
 
 function TSamsungNVMeCommandSet.GetCommonBuffer: SCSI_WITH_BUFFER;
 const

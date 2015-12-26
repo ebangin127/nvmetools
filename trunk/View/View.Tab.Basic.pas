@@ -83,7 +83,6 @@ function TBasicTab.GetCapacity: String;
     KBtoMB.FNumeralSystem := Denary;
     KBtoMB.FFromUnit := KiloUnit;
     KBtoMB.FToUnit := MegaUnit;
-
     result :=
       ChangeDatasizeUnit(
         SizeInBinaryKiB,

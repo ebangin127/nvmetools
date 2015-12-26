@@ -62,6 +62,8 @@ type
     function InterpretIntelSpecificSMARTBuffer: TSMARTValueList;
     procedure AppendAndFree(var Destination: TSMARTValueList;
       const Source: TSMARTValueList);
+    function NotAllZero: Boolean;
+    function IsIntelDevice: Boolean;
   end;
 
 implementation
@@ -140,6 +142,12 @@ begin
   FreeAndNil(SCSIBufferInterpreter);
 end;
 
+function TIntelNVMePortCommandSet.IsIntelDevice: Boolean;
+begin
+  result :=
+    Pos('INTEL', IdentifyDevice.Model) = 1;
+end;
+
 function TIntelNVMePortCommandSet.SMARTReadData: TSMARTValueList;
 const
   SMARTHealthInformation = 2;
@@ -149,6 +157,8 @@ begin
   result := nil;
   SetBufferAndSMART(SMARTHealthInformation);
   AppendAndFree(result, InterpretSMARTBuffer);
+  if not IsIntelDevice then
+    exit;
   SetBufferAndSMART(IntelSpecific);
   AppendAndFree(result, InterpretIntelSpecificSMARTBuffer);
   SetBufferAndSMART(Temperature);
@@ -179,7 +189,7 @@ procedure TIntelNVMePortCommandSet.SetInnerBufferToSMARTCommand(
   const LogIdentifier: Cardinal);
 const
   GetLogPage = 2;
-  MaxNUMD = $FF;
+  MaxNUMD = $40;
   GlobalLogPage = $FFFFFFFF;
 var
   CommandDescriptorBlock: NVME_PASS_THROUGH;
@@ -202,14 +212,26 @@ begin
   FreeAndNil(SCSIBufferInterpreter);
 end;
 
+function TIntelNVMePortCommandSet.NotAllZero: Boolean;
+var
+  CurrentPoint: Byte;
+begin
+  result := false;
+  for CurrentPoint in IoInnerBuffer.Buffer do
+    result := result or (IoInnerBuffer.Buffer[CurrentPoint] > 0);
+end;
+
 function TIntelNVMePortCommandSet.InterpretIntelSpecificSMARTBuffer:
   TSMARTValueList;
 var
   SCSIBufferInterpreter: TIntelBufferInterpreter;
 begin
   SCSIBufferInterpreter := TIntelBufferInterpreter.Create;
-  result :=
-    SCSIBufferInterpreter.VendorSpecificSMARTValueList(IoInnerBuffer.Buffer);
+  if NotAllZero then
+    result :=
+      SCSIBufferInterpreter.VendorSpecificSMARTValueList(IoInnerBuffer.Buffer)
+  else
+    result := TSMARTValueList.Create;
   FreeAndNil(SCSIBufferInterpreter);
 end;
 

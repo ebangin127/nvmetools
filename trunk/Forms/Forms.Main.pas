@@ -63,10 +63,13 @@ begin
 end;
 
 procedure TfMain.cSelectDriveChange(Sender: TObject);
+const
+  BasicTab = 0;
 begin
   if (cSelectDrive.ItemIndex >= 0) and
     (cSelectDrive.ItemIndex <> LastDrive) then
   begin
+    tValues.TabIndex := BasicTab;
     RefreshScreen;
     LastDrive := cSelectDrive.ItemIndex;
   end;
@@ -139,7 +142,7 @@ end;
 
 procedure TfMain.SetCaption;
 begin
-  Caption := 'Naraeon NVMe Tools Alpha 4 (' +
+  Caption := 'Naraeon NVMe Tools Alpha 5 (' +
     ToRefreshPress[CurrLang] + ' - F5)';
 end;
 
@@ -211,7 +214,6 @@ var
 begin
   if InvalidIndex then
     exit(false);
-
   Interpreter := VendorInterpeterFactory.GetSuitableInterpreter(
     DriveList[cSelectDrive.ItemIndex].IdentifyDeviceResult.Model,
     DriveList[cSelectDrive.ItemIndex].IdentifyDeviceResult.Firmware);
