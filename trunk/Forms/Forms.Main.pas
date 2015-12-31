@@ -25,6 +25,7 @@ type
     procedure gValuesClick(Sender: TObject);
   public
     procedure ResizeGridColumn;
+    procedure ResizeGridRow;
   private
     DriveList: TPhysicalDriveList;
     LastDrive: Integer;
@@ -46,6 +47,7 @@ type
     procedure RefreshScreen;
     procedure HideSerial;
     procedure ShowSerial;
+    function GetMaxTextHeight(const Row: Integer): Cardinal;
   end;
 
 var
@@ -142,7 +144,7 @@ end;
 
 procedure TfMain.SetCaption;
 begin
-  Caption := 'Naraeon NVMe Tools Alpha 5 (' +
+  Caption := 'Naraeon NVMe Tools Alpha 6 (' +
     ToRefreshPress[CurrLang] + ' - F5)';
 end;
 
@@ -236,6 +238,7 @@ begin
   gValues.Width := ClientWidth;
   gValues.Height := ClientHeight - gValues.Top - tValues.Top;
   ResizeGridColumn;
+  ResizeGridRow;
 end;
 
 procedure TfMain.ResizeGridColumn;
@@ -247,6 +250,17 @@ begin
   for CurrentColumn := 0 to gValues.ColCount - 1 do
     fMain.gValues.ColWidths[CurrentColumn] :=
       GetMaxTextWidth(CurrentColumn) + Padding;
+end;
+
+procedure TfMain.ResizeGridRow;
+const
+  Padding = 4;
+var
+  CurrentRow: Integer;
+begin
+  for CurrentRow := 0 to gValues.RowCount - 1 do
+    fMain.gValues.RowHeights[CurrentRow] :=
+      GetMaxTextHeight(CurrentRow) + Padding;
 end;
 
 function TfMain.GetMaxTextWidth(const Column: Integer): Cardinal;
@@ -265,6 +279,28 @@ begin
         gValues.Cells[Column, CurrentRow]);
       if CurrentWidth > result then
         result := CurrentWidth;
+    end;
+  finally
+    TestingBitmap.Free;
+  end;
+end;
+
+function TfMain.GetMaxTextHeight(const Row: Integer): Cardinal;
+var
+  TestingBitmap: TBitmap;
+  CurrentRow: Integer;
+  CurrentHeight: Cardinal;
+begin
+  TestingBitmap := TBitmap.Create;
+  result := 0;
+  try
+    TestingBitmap.Canvas.Font.Assign(gValues.Font);
+    for CurrentRow := 0 to gValues.RowCount - 1 do
+    begin
+      CurrentHeight := TestingBitmap.Canvas.TextHeight(
+        gValues.Cells[CurrentRow, Row]);
+      if CurrentHeight > result then
+        result := CurrentHeight;
     end;
   finally
     TestingBitmap.Free;

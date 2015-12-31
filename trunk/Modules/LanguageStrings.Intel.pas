@@ -1,4 +1,4 @@
-unit LanguageStrings.Intel;
+ï»¿unit LanguageStrings.Intel;
 
 interface
 
@@ -6,43 +6,43 @@ uses LanguageStrings;
 
 const
   CurrentTemperature: TLanguageString =
-    ('ÇöÀç ¿Âµµ', 'Current Temperature');
+    ('í˜„ì¬ ì˜¨ë„', 'Current Temperature');
   HighestTemperature: TLanguageString =
-    ('°¡Àå ³ôÀº ¿Âµµ (»óÇÑ)', 'Highest Temperature (Limit)');
+    ('ê°€ì¥ ë†’ì€ ì˜¨ë„ (ìƒí•œ)', 'Highest Temperature (Limit)');
   LowestTemperature: TLanguageString =
-    ('°¡Àå ³·Àº ¿Âµµ (ÇÏÇÑ)', 'Lowest Temperature (Limit)');
+    ('ê°€ì¥ ë‚®ì€ ì˜¨ë„ (í•˜í•œ)', 'Lowest Temperature (Limit)');
   ProgramFailCount: TLanguageString =
-    ('ÇÁ·Î±×·¥ ½ÇÆĞ È½¼ö', 'Program Fail Count');
+    ('í”„ë¡œê·¸ë¨ ì‹¤íŒ¨ íšŸìˆ˜', 'Program Fail Count');
   EraseFailCount: TLanguageString =
-    ('Áö¿ì±â ½ÇÆĞ È½¼ö', 'Erase Fail Count');
+    ('ì§€ìš°ê¸° ì‹¤íŒ¨ íšŸìˆ˜', 'Erase Fail Count');
   MinimumEraseCycles: TLanguageString =
-    ('ÃÖ¼Ò Áö¿ì±â È½¼ö', 'Minimum Erase Cycles');
+    ('ìµœì†Œ ì§€ìš°ê¸° íšŸìˆ˜', 'Minimum Erase Cycles');
   MaximumEraseCycles: TLanguageString =
-    ('ÃÖ´ë Áö¿ì±â È½¼ö', 'Maximum Erase Cycles');
+    ('ìµœëŒ€ ì§€ìš°ê¸° íšŸìˆ˜', 'Maximum Erase Cycles');
   AverageEraseCycles: TLanguageString =
-    ('Æò±Õ Áö¿ì±â È½¼ö', 'Average Erase Cycles');
+    ('í‰ê·  ì§€ìš°ê¸° íšŸìˆ˜', 'Average Erase Cycles');
   EndToEndErrorDetection: TLanguageString =
-    ('Á¾´Ü°£ ¿À·ù ¹ß°ß È½¼ö', 'End-to-End Error Detection Count');
+    ('ì¢…ë‹¨ê°„ ì˜¤ë¥˜ ë°œê²¬ íšŸìˆ˜', 'End-to-End Error Detection Count');
   CRCErrorCount: TLanguageString =
-    ('PCIe CRC ¿À·ù È½¼ö', 'PCIe CRC Error Count');
+    ('PCIe CRC ì˜¤ë¥˜ íšŸìˆ˜', 'PCIe CRC Error Count');
   TimedWorkloadMediaWear: TLanguageString =
-    ('ÃÖ´ë »çÀÌÅ¬ ´ëºñ »ç¿ë·ü', 'Timed Workload, Media Wear');
+    ('ìµœëŒ€ ì‚¬ì´í´ ëŒ€ë¹„ ì‚¬ìš©ë¥ ', 'Timed Workload, Media Wear');
   TimedWorkloadHostReadWriteRatio: TLanguageString =
-    ('ÀüÃ¼ I/O Áß ÀĞ±â ºñÀ²', 'Timed Workload, Host Reads %');
+    ('ì „ì²´ I/O ì¤‘ ì½ê¸° ë¹„ìœ¨', 'Timed Workload, Host Reads %');
   TimedWorkloadTimer: TLanguageString =
-    ('¿öÅ©·Îµå ÃøÁ¤ ½Ã°£', 'Timed Workload, Timer');
+    ('ì›Œí¬ë¡œë“œ ì¸¡ì • ì‹œê°„', 'Timed Workload, Timer');
   ThermalThrottleStatus: TLanguageString =
-    ('¹ß¿­·Î ÀÎÇÑ ¼º´É Á¦ÇÑ »óÅÂ', 'Thermal Throttling Status %');
+    ('ë°œì—´ë¡œ ì¸í•œ ì„±ëŠ¥ ì œí•œ ìƒíƒœ', 'Thermal Throttling Status %');
   ThermalThrottleCount: TLanguageString =
-    ('¹ß¿­·Î ÀÎÇÑ ¼º´É Á¦ÇÑ È½¼ö', 'Thermal Throttling Count');
+    ('ë°œì—´ë¡œ ì¸í•œ ì„±ëŠ¥ ì œí•œ íšŸìˆ˜', 'Thermal Throttling Count');
   RetryBufferOverflowCount: TLanguageString =
-    ('Àç½Ãµµ ¹öÆÛ ³ÑÄ§ È½¼ö', 'Retry Buffer Overflow Count');
+    ('ì¬ì‹œë„ ë²„í¼ ë„˜ì¹¨ íšŸìˆ˜', 'Retry Buffer Overflow Count');
   PLLLockLossCount: TLanguageString =
-    ('À§»ó µ¿±âÈ­ ·çÇÁ ÇØÁ¦ È½¼ö', 'PLL Lock Loss Count');
+    ('ìœ„ìƒ ë™ê¸°í™” ë£¨í”„ í•´ì œ íšŸìˆ˜', 'PLL Lock Loss Count');
   NANDBytesWritten: TLanguageString =
-    ('³½µå ¾²±â', 'NAND Writes');
+    ('ë‚¸ë“œ ì“°ê¸°', 'NAND Writes');
   HostBytesWritten: TLanguageString =
-    ('È£½ºÆ® ¾²±â', 'Host Writes');
+    ('í˜¸ìŠ¤íŠ¸ ì“°ê¸°', 'Host Writes');
 
 implementation
 

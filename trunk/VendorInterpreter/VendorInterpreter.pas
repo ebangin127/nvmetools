@@ -1,4 +1,4 @@
-unit VendorInterpreter;
+ï»¿unit VendorInterpreter;
 
 interface
 
@@ -45,7 +45,7 @@ end;
 
 function TVendorInterpreter.FormatAsCelcius(const Value: Integer): String;
 begin
-  result := Value.ToString + ' ¡ÆC';
+  result := Value.ToString + ' Â°C';
 end;
 
 function TVendorInterpreter.FormatAsLBA(const Value: UInt64): String;

@@ -15,6 +15,7 @@ type
     procedure ResizeGridColumn;
     procedure AddBasicColumn;
     procedure AddColumn(const ColumnName: String);
+    procedure ResizeGridRow;
   protected
     function GetSelectedDrive: IPhysicalDrive;
     procedure AddRow(const RowName, RowValue: String);
@@ -74,6 +75,11 @@ begin
   fMain.ResizeGridColumn;
 end;
 
+procedure TTab.ResizeGridRow;
+begin
+  fMain.ResizeGridRow;
+end;
+
 procedure TTab.AddBasicColumn;
 begin
   AddColumn(Value[CurrLang]);
@@ -85,6 +91,7 @@ begin
   AddBasicColumn;
   FillTab;
   ResizeGridColumn;
+  ResizeGridRow;
 end;
 
 end.
