@@ -15,6 +15,9 @@ const
   LANG_ENGLISH = 1;
 
 const
+  FontName: TLanguageString =
+    ('맑은 고딕', 'Segoe UI');
+
   Basic: TLanguageString =
     ('기본', 'Basic');
   Driver: TLanguageString =

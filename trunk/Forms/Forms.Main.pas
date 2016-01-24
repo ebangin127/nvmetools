@@ -48,6 +48,7 @@ type
     procedure HideSerial;
     procedure ShowSerial;
     function GetMaxTextHeight(const Row: Integer): Cardinal;
+    procedure SetFont;
   end;
 
 var
@@ -148,6 +149,11 @@ begin
     ToRefreshPress[CurrLang] + ' - F5)';
 end;
 
+procedure TfMain.SetFont;
+begin
+  Font.Name := FontName[CurrLang];
+end;
+
 procedure TfMain.SetTabCaption;
 begin
   tValues.Tabs[0] := Basic[CurrLang];
@@ -169,6 +175,7 @@ end;
 procedure TfMain.FormCreate(Sender: TObject);
 begin
   LastDrive := -1;
+  SetFont;
   SetCaption;
   SetTabCaption;
   RefreshDrives;
