@@ -52,7 +52,8 @@ uses
   VendorInterpreter in 'VendorInterpreter\VendorInterpreter.pas',
   VendorInterpreter.Intel in 'VendorInterpreter\VendorInterpreter.Intel.pas',
   LanguageStrings.Intel in 'Modules\LanguageStrings.Intel.pas',
-  VendorInterpreter.Factory in 'VendorInterpreter\VendorInterpreter.Factory.pas';
+  VendorInterpreter.Factory in 'VendorInterpreter\VendorInterpreter.Factory.pas',
+  CommandSet.NVMe.OS in 'WindowsFileAPI\CommandSet.NVMe.OS.pas';
 
 {$R *.res}
 {$SETPEOPTFLAGS $140}

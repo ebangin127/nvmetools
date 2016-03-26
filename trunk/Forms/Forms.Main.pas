@@ -145,7 +145,7 @@ end;
 
 procedure TfMain.SetCaption;
 begin
-  Caption := 'Naraeon NVMe Tools Alpha 6 (' +
+  Caption := 'Naraeon NVMe Tools Alpha 7 (' +
     ToRefreshPress[CurrLang] + ' - F5)';
 end;
 

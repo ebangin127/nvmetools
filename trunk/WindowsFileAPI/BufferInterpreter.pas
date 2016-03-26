@@ -9,7 +9,7 @@ type
   TSmallBuffer = Array[0..511] of Byte;
   TLargeBuffer = Array[0..4096] of Byte;
   TStorageInterface =
-    (Probing, ATA, SAT, SCSI, UnknownInterface);
+    (Probing, ATA, SAT, SCSI, NVMe, UnknownInterface);
   TSATASpeed =
     (NotSATA, UnknownSATASpeed, SATA150, SATA300, SATA600);
   TIdentifyDeviceResult = record
